@@ -5,7 +5,7 @@ import java.util.Objects;
 
 @Entity
 @Table(name = "user", schema = "hotel", catalog = "")
-public class hotelUser {
+public class User {
     private int userId;
     private String password;
     private String role;
@@ -55,11 +55,11 @@ public class hotelUser {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        hotelUser hotelUser = (hotelUser) o;
-        return userId == hotelUser.userId &&
-                Objects.equals(password, hotelUser.password) &&
-                Objects.equals(role, hotelUser.role) &&
-                Objects.equals(userName, hotelUser.userName);
+        User User = (User) o;
+        return userId == User.userId &&
+                Objects.equals(password, User.password) &&
+                Objects.equals(role, User.role) &&
+                Objects.equals(userName, User.userName);
     }
 
     @Override

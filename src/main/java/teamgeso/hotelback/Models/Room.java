@@ -5,7 +5,7 @@ import java.util.Objects;
 
 @Entity
 @Table(name = "room", schema = "hotel", catalog = "")
-public class hotelRoom {
+public class Room {
     private int roomId;
     private int roomtypeId;
 
@@ -33,9 +33,9 @@ public class hotelRoom {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        hotelRoom hotelRoom = (hotelRoom) o;
-        return roomId == hotelRoom.roomId &&
-                roomtypeId == hotelRoom.roomtypeId;
+        Room Room = (Room) o;
+        return roomId == Room.roomId &&
+                roomtypeId == Room.roomtypeId;
     }
 
     @Override

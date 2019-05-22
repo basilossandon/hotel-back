@@ -5,7 +5,7 @@ import java.util.Objects;
 
 @Entity
 @Table(name = "roomtype", schema = "hotel", catalog = "")
-public class hotelRoomtype {
+public class Roomtype {
     private int roomtypeId;
     private String type;
     private Double price;
@@ -44,7 +44,7 @@ public class hotelRoomtype {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        hotelRoomtype that = (hotelRoomtype) o;
+        Roomtype that = (Roomtype) o;
         return roomtypeId == that.roomtypeId &&
                 Objects.equals(type, that.type) &&
                 Objects.equals(price, that.price);
