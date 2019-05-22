@@ -1,4 +1,4 @@
-package com.teamgeso.hotelback;
+package teamgeso.hotelback;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
