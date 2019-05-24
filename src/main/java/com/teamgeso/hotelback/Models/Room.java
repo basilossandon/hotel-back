@@ -1,8 +1,10 @@
 package com.teamgeso.hotelback.Models;
 
 import javax.persistence.*;
+import java.io.Serializable;
 
 @Entity
+@Table(name="room")
 @IdClass(RoomPK.class)
 public class Room {
     private int id;
