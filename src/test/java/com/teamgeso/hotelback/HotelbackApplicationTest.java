@@ -8,7 +8,7 @@ public class HotelbackApplicationTest {
 
     @Test
     public void main() {
-        fail("exception");
+        fail("exception as");
 
     }
 }
