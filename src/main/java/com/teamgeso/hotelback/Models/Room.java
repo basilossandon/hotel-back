@@ -1,37 +1,23 @@
 package com.teamgeso.hotelback.Models;
 
-import javax.persistence.Basic;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import java.util.Objects;
+import javax.persistence.*;
 
 @Entity
+@IdClass(RoomPK.class)
 public class Room {
-    private int roomId;
-    private String type;
+    private int id;
     private Integer capacity;
     private Double price;
     private int roomTypeId;
 
     @Id
-    @Column(name = "room_id")
-    public int getRoomId() {
-        return roomId;
+    @Column(name = "id")
+    public int getId() {
+        return id;
     }
 
-    public void setRoomId(int roomId) {
-        this.roomId = roomId;
-    }
-
-    @Basic
-    @Column(name = "type")
-    public String getType() {
-        return type;
-    }
-
-    public void setType(String type) {
-        this.type = type;
+    public void setId(int id) {
+        this.id = id;
     }
 
     @Basic
@@ -54,7 +40,7 @@ public class Room {
         this.price = price;
     }
 
-    @Basic
+    @Id
     @Column(name = "roomType_id")
     public int getRoomTypeId() {
         return roomTypeId;
@@ -68,16 +54,23 @@ public class Room {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
+
         Room room = (Room) o;
-        return roomId == room.roomId &&
-                roomTypeId == room.roomTypeId &&
-                Objects.equals(type, room.type) &&
-                Objects.equals(capacity, room.capacity) &&
-                Objects.equals(price, room.price);
+
+        if (id != room.id) return false;
+        if (roomTypeId != room.roomTypeId) return false;
+        if (capacity != null ? !capacity.equals(room.capacity) : room.capacity != null) return false;
+        if (price != null ? !price.equals(room.price) : room.price != null) return false;
+
+        return true;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(roomId, type, capacity, price, roomTypeId);
+        int result = id;
+        result = 31 * result + (capacity != null ? capacity.hashCode() : 0);
+        result = 31 * result + (price != null ? price.hashCode() : 0);
+        result = 31 * result + roomTypeId;
+        return result;
     }
 }

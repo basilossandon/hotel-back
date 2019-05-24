@@ -4,23 +4,12 @@ import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
-import java.util.Objects;
 
 @Entity
 public class Service {
-    private int serviceId;
     private String name;
     private Double price;
-
-    @Id
-    @Column(name = "service_id")
-    public int getServiceId() {
-        return serviceId;
-    }
-
-    public void setServiceId(int serviceId) {
-        this.serviceId = serviceId;
-    }
+    private int id;
 
     @Basic
     @Column(name = "name")
@@ -46,14 +35,29 @@ public class Service {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
+
         Service service = (Service) o;
-        return serviceId == service.serviceId &&
-                Objects.equals(name, service.name) &&
-                Objects.equals(price, service.price);
+
+        if (name != null ? !name.equals(service.name) : service.name != null) return false;
+        if (price != null ? !price.equals(service.price) : service.price != null) return false;
+
+        return true;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(serviceId, name, price);
+        int result = name != null ? name.hashCode() : 0;
+        result = 31 * result + (price != null ? price.hashCode() : 0);
+        return result;
+    }
+
+    @Id
+    @Column(name = "id")
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 }

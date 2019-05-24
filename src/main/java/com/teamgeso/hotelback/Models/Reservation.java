@@ -2,12 +2,10 @@ package com.teamgeso.hotelback.Models;
 
 import javax.persistence.*;
 import java.sql.Timestamp;
-import java.util.Objects;
 
 @Entity
 @IdClass(ReservationPK.class)
 public class Reservation {
-    private int reservationId;
     private Timestamp start;
     private Timestamp end;
     private Double finalPrice;
@@ -16,16 +14,7 @@ public class Reservation {
     private String checkinName;
     private int roomId;
     private String type;
-
-    @Id
-    @Column(name = "reservation_id")
-    public int getReservationId() {
-        return reservationId;
-    }
-
-    public void setReservationId(int reservationId) {
-        this.reservationId = reservationId;
-    }
+    private int id;
 
     @Basic
     @Column(name = "start")
@@ -111,20 +100,42 @@ public class Reservation {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
+
         Reservation that = (Reservation) o;
-        return reservationId == that.reservationId &&
-                roomId == that.roomId &&
-                Objects.equals(start, that.start) &&
-                Objects.equals(end, that.end) &&
-                Objects.equals(finalPrice, that.finalPrice) &&
-                Objects.equals(code, that.code) &&
-                Objects.equals(documentNumber, that.documentNumber) &&
-                Objects.equals(checkinName, that.checkinName) &&
-                Objects.equals(type, that.type);
+
+        if (roomId != that.roomId) return false;
+        if (start != null ? !start.equals(that.start) : that.start != null) return false;
+        if (end != null ? !end.equals(that.end) : that.end != null) return false;
+        if (finalPrice != null ? !finalPrice.equals(that.finalPrice) : that.finalPrice != null) return false;
+        if (code != null ? !code.equals(that.code) : that.code != null) return false;
+        if (documentNumber != null ? !documentNumber.equals(that.documentNumber) : that.documentNumber != null)
+            return false;
+        if (checkinName != null ? !checkinName.equals(that.checkinName) : that.checkinName != null) return false;
+        if (type != null ? !type.equals(that.type) : that.type != null) return false;
+
+        return true;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(reservationId, start, end, finalPrice, code, documentNumber, checkinName, roomId, type);
+        int result = start != null ? start.hashCode() : 0;
+        result = 31 * result + (end != null ? end.hashCode() : 0);
+        result = 31 * result + (finalPrice != null ? finalPrice.hashCode() : 0);
+        result = 31 * result + (code != null ? code.hashCode() : 0);
+        result = 31 * result + (documentNumber != null ? documentNumber.hashCode() : 0);
+        result = 31 * result + (checkinName != null ? checkinName.hashCode() : 0);
+        result = 31 * result + roomId;
+        result = 31 * result + (type != null ? type.hashCode() : 0);
+        return result;
+    }
+
+    @Id
+    @Column(name = "id")
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 }

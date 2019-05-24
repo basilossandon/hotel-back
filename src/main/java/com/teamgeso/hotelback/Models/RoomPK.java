@@ -4,9 +4,9 @@ import javax.persistence.Column;
 import javax.persistence.Id;
 import java.io.Serializable;
 
-public class ReservationPK implements Serializable {
+public class RoomPK implements Serializable {
     private int id;
-    private int roomId;
+    private int roomTypeId;
 
     @Column(name = "id")
     @Id
@@ -18,14 +18,14 @@ public class ReservationPK implements Serializable {
         this.id = id;
     }
 
-    @Column(name = "room_id")
+    @Column(name = "roomType_id")
     @Id
-    public int getRoomId() {
-        return roomId;
+    public int getRoomTypeId() {
+        return roomTypeId;
     }
 
-    public void setRoomId(int roomId) {
-        this.roomId = roomId;
+    public void setRoomTypeId(int roomTypeId) {
+        this.roomTypeId = roomTypeId;
     }
 
     @Override
@@ -33,10 +33,10 @@ public class ReservationPK implements Serializable {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
 
-        ReservationPK that = (ReservationPK) o;
+        RoomPK roomPK = (RoomPK) o;
 
-        if (id != that.id) return false;
-        if (roomId != that.roomId) return false;
+        if (id != roomPK.id) return false;
+        if (roomTypeId != roomPK.roomTypeId) return false;
 
         return true;
     }
@@ -44,7 +44,7 @@ public class ReservationPK implements Serializable {
     @Override
     public int hashCode() {
         int result = id;
-        result = 31 * result + roomId;
+        result = 31 * result + roomTypeId;
         return result;
     }
 }
