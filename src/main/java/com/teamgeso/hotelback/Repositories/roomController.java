@@ -3,13 +3,16 @@ import com.teamgeso.hotelback.Models.Room;
 
 import org.springframework.web.bind.annotation.*;
 import java.util.List;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 public class roomController {
     private RoomRepository roomRepository;
     @GetMapping("/rooms")
     @ResponseBody
-    public List<Room> getAllProducts() {
+    public List<Room> getAllRooms() {
         return roomRepository.findAll();
     }
 
