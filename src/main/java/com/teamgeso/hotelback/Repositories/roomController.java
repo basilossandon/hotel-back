@@ -1,6 +1,7 @@
 package com.teamgeso.hotelback.Repositories;
 import com.teamgeso.hotelback.Models.Room;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import java.util.List;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -9,6 +10,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 public class roomController {
+    @Autowired
     private RoomRepository roomRepository;
     @GetMapping("/rooms")
     @ResponseBody
