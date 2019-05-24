@@ -1,11 +1,11 @@
-package teamgeso.hotelback.Models;
+package com.teamgeso.hotelback.Models;
 
 import javax.persistence.*;
 import java.sql.Timestamp;
 import java.util.Objects;
 
 @Entity
-@Table(name = "reservation", schema = "hotel", catalog = "")
+@IdClass(ReservationPK.class)
 public class Reservation {
     private int reservationId;
     private Timestamp start;

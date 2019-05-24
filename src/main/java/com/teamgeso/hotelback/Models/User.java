@@ -1,10 +1,12 @@
-package teamgeso.hotelback.Models;
+package com.teamgeso.hotelback.Models;
 
-import javax.persistence.*;
+import javax.persistence.Basic;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
 import java.util.Objects;
 
 @Entity
-@Table(name = "user", schema = "hotel", catalog = "")
 public class User {
     private int userId;
     private String password;
@@ -55,11 +57,11 @@ public class User {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        User User = (User) o;
-        return userId == User.userId &&
-                Objects.equals(password, User.password) &&
-                Objects.equals(role, User.role) &&
-                Objects.equals(userName, User.userName);
+        User user = (User) o;
+        return userId == user.userId &&
+                Objects.equals(password, user.password) &&
+                Objects.equals(role, user.role) &&
+                Objects.equals(userName, user.userName);
     }
 
     @Override
