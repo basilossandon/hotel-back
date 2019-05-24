@@ -1,4 +1,4 @@
-package com.teamgeso.hotelback.Models;
+package com.teamgeso.hotelback.models;
 
 import javax.persistence.Basic;
 import javax.persistence.Column;
@@ -6,20 +6,10 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 
 @Entity
-public class Service {
-    private String name;
+public class RoomType {
     private Double price;
     private int id;
-
-    @Basic
-    @Column(name = "name")
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
+    private String name;
 
     @Basic
     @Column(name = "price")
@@ -36,19 +26,16 @@ public class Service {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
 
-        Service service = (Service) o;
+        RoomType roomType = (RoomType) o;
 
-        if (name != null ? !name.equals(service.name) : service.name != null) return false;
-        if (price != null ? !price.equals(service.price) : service.price != null) return false;
+        if (price != null ? !price.equals(roomType.price) : roomType.price != null) return false;
 
         return true;
     }
 
     @Override
     public int hashCode() {
-        int result = name != null ? name.hashCode() : 0;
-        result = 31 * result + (price != null ? price.hashCode() : 0);
-        return result;
+        return price != null ? price.hashCode() : 0;
     }
 
     @Id
@@ -59,5 +46,15 @@ public class Service {
 
     public void setId(int id) {
         this.id = id;
+    }
+
+    @Basic
+    @Column(name = "name")
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 }

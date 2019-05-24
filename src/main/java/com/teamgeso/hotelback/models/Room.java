@@ -1,7 +1,6 @@
-package com.teamgeso.hotelback.Models;
+package com.teamgeso.hotelback.models;
 
 import javax.persistence.*;
-import java.io.Serializable;
 
 @Entity
 @Table(name="room")

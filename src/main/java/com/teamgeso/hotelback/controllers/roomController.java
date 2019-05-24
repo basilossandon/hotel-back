@@ -1,6 +1,6 @@
-package com.teamgeso.hotelback.Repositories;
-import com.teamgeso.hotelback.Models.Room;
-
+package com.teamgeso.hotelback.controllers;
+import com.teamgeso.hotelback.models.Room;
+import com.teamgeso.hotelback.repositories.RoomRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import java.util.List;
@@ -24,6 +24,4 @@ public class roomController {
     public Room getRoomById(@PathVariable Integer id) {
         return roomRepository.findRoomById(id);
     }
-
-
 }

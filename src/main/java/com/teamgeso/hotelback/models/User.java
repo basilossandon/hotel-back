@@ -1,4 +1,4 @@
-package com.teamgeso.hotelback.Models;
+package com.teamgeso.hotelback.models;
 
 import javax.persistence.Basic;
 import javax.persistence.Column;
