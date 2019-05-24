@@ -1,18 +1,33 @@
 package com.teamgeso.hotelback.models;
 
 import javax.persistence.*;
+import java.io.Serializable;
 
 @Entity
 @Table(name="room")
-@IdClass(RoomPK.class)
-public class Room {
-    private int id;
-    private Integer capacity;
-    private Double price;
-    private int roomTypeId;
-
+public class Room implements Serializable {
     @Id
-    @Column(name = "id")
+    @Column(nullable = false)
+    private Integer id;
+    @Column(name = "capacity", nullable = false)
+    private Integer capacity;
+    @Column(name = "price", nullable = false)
+    private Double price;
+    @Column(name = "room_type_id", nullable = false)
+    private Integer room_type_id;
+
+    public Room(Integer id,
+                Integer  capacity,
+                Double  price,
+                Integer  room_type_id){
+        this.id = id;
+        this.capacity = capacity;
+        this.price = price;
+        this.room_type_id = room_type_id;
+    }
+
+    public Room(){
+    }
     public int getId() {
         return id;
     }
@@ -21,8 +36,6 @@ public class Room {
         this.id = id;
     }
 
-    @Basic
-    @Column(name = "capacity")
     public Integer getCapacity() {
         return capacity;
     }
@@ -31,8 +44,6 @@ public class Room {
         this.capacity = capacity;
     }
 
-    @Basic
-    @Column(name = "price")
     public Double getPrice() {
         return price;
     }
@@ -41,37 +52,12 @@ public class Room {
         this.price = price;
     }
 
-    @Id
-    @Column(name = "roomType_id")
-    public int getRoomTypeId() {
-        return roomTypeId;
+    public int getRoom_type_id() {
+        return room_type_id;
     }
 
-    public void setRoomTypeId(int roomTypeId) {
-        this.roomTypeId = roomTypeId;
+    public void setRoom_type_id(int room_type_id) {
+        this.room_type_id = room_type_id;
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-
-        Room room = (Room) o;
-
-        if (id != room.id) return false;
-        if (roomTypeId != room.roomTypeId) return false;
-        if (capacity != null ? !capacity.equals(room.capacity) : room.capacity != null) return false;
-        if (price != null ? !price.equals(room.price) : room.price != null) return false;
-
-        return true;
-    }
-
-    @Override
-    public int hashCode() {
-        int result = id;
-        result = 31 * result + (capacity != null ? capacity.hashCode() : 0);
-        result = 31 * result + (price != null ? price.hashCode() : 0);
-        result = 31 * result + roomTypeId;
-        return result;
-    }
 }

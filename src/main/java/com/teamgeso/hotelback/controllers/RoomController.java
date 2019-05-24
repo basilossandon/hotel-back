@@ -1,4 +1,4 @@
-package com.teamgeso.hotelback.repositories;
+package com.teamgeso.hotelback.controllers;
 import com.teamgeso.hotelback.models.Room;
 import com.teamgeso.hotelback.repositories.RoomRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @CrossOrigin(origins = "*")
-public class roomController {
+public class RoomController {
     @Autowired
     private RoomRepository roomRepository;
     @GetMapping("/rooms")
