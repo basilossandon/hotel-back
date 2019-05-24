@@ -1,6 +1,6 @@
 node {
     stage('Checkout') {
-        git 'https://github.com/basilossandon/hotelback.git'
+        git 'https://github.com/basilossandon/hotel-back.git'
     }
     
     stage('Compile-Package') {
