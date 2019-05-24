@@ -1,12 +1,12 @@
-package com.teamgeso.hotelback.Models;
+package com.teamgeso.hotelback.models;
 
 import javax.persistence.Column;
 import javax.persistence.Id;
 import java.io.Serializable;
 
-public class RoomPK implements Serializable {
+public class ReservationPK implements Serializable {
     private int id;
-    private int roomTypeId;
+    private int roomId;
 
     @Column(name = "id")
     @Id
@@ -18,14 +18,14 @@ public class RoomPK implements Serializable {
         this.id = id;
     }
 
-    @Column(name = "roomType_id")
+    @Column(name = "room_id")
     @Id
-    public int getRoomTypeId() {
-        return roomTypeId;
+    public int getRoomId() {
+        return roomId;
     }
 
-    public void setRoomTypeId(int roomTypeId) {
-        this.roomTypeId = roomTypeId;
+    public void setRoomId(int roomId) {
+        this.roomId = roomId;
     }
 
     @Override
@@ -33,10 +33,10 @@ public class RoomPK implements Serializable {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
 
-        RoomPK roomPK = (RoomPK) o;
+        ReservationPK that = (ReservationPK) o;
 
-        if (id != roomPK.id) return false;
-        if (roomTypeId != roomPK.roomTypeId) return false;
+        if (id != that.id) return false;
+        if (roomId != that.roomId) return false;
 
         return true;
     }
@@ -44,7 +44,7 @@ public class RoomPK implements Serializable {
     @Override
     public int hashCode() {
         int result = id;
-        result = 31 * result + roomTypeId;
+        result = 31 * result + roomId;
         return result;
     }
 }
