@@ -1,4 +1,4 @@
-package com.teamgeso.hotelback.controller;
+package com.teamgeso.hotelback.repository;
 import com.teamgeso.hotelback.model.Room;
 import com.teamgeso.hotelback.repository.RoomRepository;
 import org.springframework.beans.factory.annotation.Autowired;
