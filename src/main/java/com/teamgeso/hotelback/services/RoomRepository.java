@@ -1,4 +1,4 @@
-package com.teamgeso.hotelback.repositories;
+package com.teamgeso.hotelback.services;
 import com.teamgeso.hotelback.models.Room;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
