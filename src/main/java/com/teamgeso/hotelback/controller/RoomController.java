@@ -6,22 +6,31 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @Validated
+@RequestMapping(path = "/rooms")
 @CrossOrigin(origins = "*")
 public class RoomController {
     @Autowired
     private RoomRepository roomRepository;
-    @GetMapping("/rooms")
+    @GetMapping("")
     @ResponseBody
     public List<Room> getAllRooms() {
         return roomRepository.findAll();
     }
 
-    @RequestMapping(value = "/rooms/{id}", method = RequestMethod.GET)
+    @RequestMapping(value = "/{id}", method = RequestMethod.GET)
     @ResponseBody
     public Room getRoomById(@PathVariable Integer id) {
         return roomRepository.findRoomById(id);
+    }
+
+    @RequestMapping(value = "", method = RequestMethod.POST)
+    public @ResponseBody
+    Optional<Room> createRoom(@RequestBody Room room){
+        roomRepository.save(room);
+        return roomRepository.findById(room.getId());
     }
 }

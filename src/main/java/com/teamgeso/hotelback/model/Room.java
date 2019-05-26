@@ -7,6 +7,7 @@ import java.io.Serializable;
 @Table(name="room")
 public class Room implements Serializable {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(nullable = false)
     private Integer id;
     @Column(name = "capacity", nullable = false)
@@ -28,11 +29,11 @@ public class Room implements Serializable {
 
     public Room(){
     }
-    public int getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
