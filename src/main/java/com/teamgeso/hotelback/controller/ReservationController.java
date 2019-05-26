@@ -18,18 +18,18 @@ public class ReservationController {
     @Autowired
     private ReservationRepository reservationRepository;
 
-    @RequestMapping(value = "", method = RequestMethod.GET)
+    @GetMapping(value = "")
     public @ResponseBody Iterable<Reservation> getAll(){
         return reservationRepository.findAll();
     }
 
-    @RequestMapping(value = "/{id}", method = RequestMethod.GET)
+    @GetMapping(value = "/{id}")
     public @ResponseBody
     Optional<Reservation> getReservationById(@PathVariable Integer id){
         return reservationRepository.findById(id);
     }
 
-    @RequestMapping(value = "/", method = RequestMethod.POST)
+    @PostMapping(value = "/")
     public @ResponseBody
     Optional<Reservation> createReservation(@RequestBody Reservation reservation){
         reservationRepository.save(reservation);

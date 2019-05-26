@@ -21,13 +21,13 @@ public class RoomController {
         return roomRepository.findAll();
     }
 
-    @RequestMapping(value = "/{id}", method = RequestMethod.GET)
+    @GetMapping(value = "/{id}")
     @ResponseBody
     public Room getRoomById(@PathVariable Integer id) {
         return roomRepository.findRoomById(id);
     }
 
-    @RequestMapping(value = "", method = RequestMethod.POST)
+    @PostMapping(value = "")
     public @ResponseBody
     Optional<Room> createRoom(@RequestBody Room room){
         roomRepository.save(room);

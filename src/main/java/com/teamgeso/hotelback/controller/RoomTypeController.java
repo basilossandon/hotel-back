@@ -18,19 +18,19 @@ public class RoomTypeController {
     @Autowired
     private RoomTypeRepository roomTypeRepository;
 
-    @RequestMapping(value = "", method = RequestMethod.GET)
+    @GetMapping(value = "")
     public @ResponseBody Iterable<RoomType> getAll(){
         return roomTypeRepository.findAll();
     }
 
-    @RequestMapping(value = "/{id}", method = RequestMethod.GET)
+    @GetMapping(value = "/{id}")
     public @ResponseBody
     Optional<RoomType> getRoomTypeById(@PathVariable Integer id){
         return roomTypeRepository.findById(id);
     }
 
 
-    @RequestMapping(value = "/add", method = RequestMethod.POST)
+    @PostMapping(value = "/add")
     @ResponseBody
     public List<RoomType> createRoomType(@RequestBody RoomType roomType){
         roomTypeRepository.save(roomType);
