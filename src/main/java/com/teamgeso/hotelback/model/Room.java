@@ -53,11 +53,11 @@ public class Room implements Serializable {
         this.price = price;
     }
 
-    public int getRoom_type_id() {
+    public int getRoomTypeId() {
         return room_type_id;
     }
 
-    public void setRoom_type_id(int room_type_id) {
+    public void setRoomTypeId(int room_type_id) {
         this.room_type_id = room_type_id;
     }
 

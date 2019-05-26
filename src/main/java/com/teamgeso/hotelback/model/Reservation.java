@@ -74,27 +74,27 @@ public class Reservation implements Serializable {
         this.end = end;
     }
 
-    public double getFinal_price() { return this.final_price; }
+    public double getFinalPrice() { return this.final_price; }
 
-    public void setFinal_price(double final_price){
+    public void setFinalPrice(double final_price){
         this.final_price = final_price;
     }
 
-    public String getDocument_number(){ return this.document_number;}
+    public String getDocumentNumber(){ return this.document_number;}
 
-    public void setDocument_number(String document_number){this.document_number = document_number;}
+    public void setDocumentNumber(String document_number){this.document_number = document_number;}
 
-    public String getCheckin_name(){return this.checkin_name;}
+    public String getCheckinName(){return this.checkin_name;}
 
-    public void setCheckin_name(String checkin_name){this.checkin_name = checkin_name;}
+    public void setCheckInName(String checkin_name){this.checkin_name = checkin_name;}
 
     public String getCode(){return this.code;}
 
     public void setCode(String code){this.code = code;}
 
-    public Integer getRoom_id(){return this.room_id;}
+    public Integer getRoomId(){return this.room_id;}
 
-    public void setRoom_id(Integer room_id){this.room_id= room_id;}
+    public void setRoomId(Integer room_id){this.room_id= room_id;}
 }
 
 
