@@ -43,4 +43,29 @@ public class ReservationController implements DaoReservation {
         return reservationRepository.findById(reservationToSave.getId());
     }
 
+    @PostMapping(value = "/{id}")
+    public @ResponseBody
+    Optional<Reservation> updateReservation(@PathVariable Integer id, @RequestBody ReservationDTO reservation){
+        Reservation updatedReservation = new Reservation();
+        updatedReservation.setId(id);
+        updatedReservation.setStart(reservation.getStart());
+        updatedReservation.setEnd(reservation.getEnd());
+        updatedReservation.setFinalPrice(reservation.getFinalPrice());
+        updatedReservation.setDocumentNumber(reservation.getDocumentNumber());
+        updatedReservation.setCheckInName(reservation.getCheckInName());
+        updatedReservation.setCode(reservation.getCode());
+        updatedReservation.setRoomId(reservation.getRoomId());
+        reservationRepository.save(updatedReservation);
+        return reservationRepository.findById(updatedReservation.getId());
+
+    }
+
+    @PostMapping(value = "/{id}/delete")
+    public  @ResponseBody
+    Iterable<Reservation> deleteReservation(@PathVariable Integer id){
+        reservationRepository.deleteById(id);
+        return reservationRepository.findAll();
+
+    }
+
 }

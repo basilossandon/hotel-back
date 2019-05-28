@@ -7,7 +7,7 @@ import com.teamgeso.hotelback.repository.RoomTypeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
+
 import java.util.Optional;
 
 @RestController
@@ -55,7 +55,7 @@ public class RoomTypeController implements DaoRoomType {
 
     @PostMapping (value = "/{id}/delete")
     public @ResponseBody
-    List<RoomType> deleteRoomType(@PathVariable Integer id){
+    Iterable<RoomType> deleteRoomType(@PathVariable Integer id){
         roomTypeRepository.deleteById(id);
         return roomTypeRepository.findAll();
     }

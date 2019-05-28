@@ -11,5 +11,5 @@ public interface DaoRoomType {
     Optional<RoomType> getRoomTypeById(Integer id);
     Optional<RoomType> createRoomType(RoomTypeDTO roomType);
     Optional<RoomType> updateRoomType(Integer id, RoomTypeDTO roomType);
-    List<RoomType> deleteRoomType(Integer id);
+    Iterable<RoomType> deleteRoomType(Integer id);
 }
