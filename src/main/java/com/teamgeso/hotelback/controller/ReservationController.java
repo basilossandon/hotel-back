@@ -1,17 +1,14 @@
 package com.teamgeso.hotelback.controller;
-
-
 import com.teamgeso.hotelback.model.Reservation;
+import com.teamgeso.hotelback.dto.ReservationDTO;
 import com.teamgeso.hotelback.repository.ReservationRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-
 import java.util.Optional;
 
 @RestController
 @RequestMapping(path = "/reservations")
 @CrossOrigin(origins = "*")
-
 
 public class ReservationController {
 
@@ -31,9 +28,18 @@ public class ReservationController {
 
     @PostMapping(value = "/")
     public @ResponseBody
-    Optional<Reservation> createReservation(@RequestBody Reservation reservation){
-        reservationRepository.save(reservation);
-        return reservationRepository.findById(reservation.getId());
+    Optional<Reservation> createReservation(@RequestBody ReservationDTO reservation){
+        //Here you must to add a try catch, if the reservation given on the argument has an error.
+        Reservation reservationToSave = new Reservation();
+        reservationToSave.setStart(reservation.getStart());
+        reservationToSave.setEnd(reservation.getEnd());
+        reservationToSave.setFinalPrice(reservation.getFinalPrice());
+        reservationToSave.setDocumentNumber(reservation.getDocumentNumber());
+        reservationToSave.setCheckInName(reservation.getCheckInName());
+        reservationToSave.setCode(reservation.getCode());
+        reservationToSave.setRoomId(reservation.getRoomId());
+        reservationRepository.save(reservationToSave);
+        return reservationRepository.findById(reservationToSave.getId());
     }
 
 }

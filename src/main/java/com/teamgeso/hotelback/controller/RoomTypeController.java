@@ -1,5 +1,6 @@
 package com.teamgeso.hotelback.controller;
 
+import com.teamgeso.hotelback.dto.RoomTypeDTO;
 import com.teamgeso.hotelback.model.RoomType;
 import com.teamgeso.hotelback.repository.RoomTypeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,8 +33,11 @@ public class RoomTypeController {
 
     @PostMapping(value = "/add")
     @ResponseBody
-    public List<RoomType> createRoomType(@RequestBody RoomType roomType){
-        roomTypeRepository.save(roomType);
+    public List<RoomType> createRoomType(@RequestBody RoomTypeDTO roomType){
+        RoomType roomTypeToSave = new RoomType();
+        roomTypeToSave.getName(roomType.getName());
+        roomTypeToSave.setPrice(roomType.getPrice());
+                roomTypeRepository.save(roomTypeToSave);
         return roomTypeRepository.findAll();
     }
 

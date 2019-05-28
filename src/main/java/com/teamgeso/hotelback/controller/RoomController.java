@@ -1,4 +1,5 @@
 package com.teamgeso.hotelback.controller;
+import com.teamgeso.hotelback.dto.RoomDTO;
 import com.teamgeso.hotelback.model.Room;
 import com.teamgeso.hotelback.repository.RoomRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,8 +30,12 @@ public class RoomController {
 
     @PostMapping(value = "")
     public @ResponseBody
-    Optional<Room> createRoom(@RequestBody Room room){
-        roomRepository.save(room);
-        return roomRepository.findById(room.getId());
+    Optional<Room> createRoom(@RequestBody RoomDTO room){
+        Room roomToSave = new Room();
+        roomToSave.setCapacity(room.getCapacity());
+        roomToSave.setPrice(room.getPrice());
+        roomToSave.setRoomTypeId(room.getRoomTypeId());
+        roomRepository.save(roomToSave);
+        return roomRepository.findById(roomToSave.getId());
     }
 }

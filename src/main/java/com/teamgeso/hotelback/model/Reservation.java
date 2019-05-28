@@ -4,7 +4,6 @@ import java.io.Serializable;
 import java.time.LocalDateTime;
 
 @Entity
-
 @Table(name = "reservation")
 
 public class Reservation implements Serializable {
@@ -48,50 +47,55 @@ public class Reservation implements Serializable {
 
     public Reservation(){
     }
+
     public Integer getId() {
         return this.id;
     }
-
     public void setId(Integer id) {
         this.id = id;
     }
-
     public LocalDateTime getStart() {
         return start;
     }
-
     public void setStart(LocalDateTime start) {
-        this.start = start;}
-
+        this.start = start;
+    }
     public LocalDateTime getEnd() {
         return end;
     }
-
     public void setEnd(LocalDateTime end) {
         this.end = end;
     }
-
-    public double getFinalPrice() { return this.finalPrice; }
-
+    public double getFinalPrice() {
+        return this.finalPrice;
+    }
     public void setFinalPrice(double finalPrice){
         this.finalPrice = finalPrice;
     }
-
-    public String getDocumentNumber(){ return this.documentNumber;}
-
-    public void setDocumentNumber(String documentNumber){this.documentNumber = documentNumber;}
-
-    public String getCheckinName(){return this.checkInName;}
-
-    public void setCheckInName(String checkInName){this.checkInName = checkInName;}
-
-    public String getCode(){return this.code;}
-
-    public void setCode(String code){this.code = code;}
-
-    public Integer getRoomId(){return this.roomId;}
-
-    public void setRoomId(Integer roomId){this.roomId= roomId;}
+    public String getDocumentNumber(){
+        return this.documentNumber;
+    }
+    public void setDocumentNumber(String documentNumber){
+        this.documentNumber = documentNumber;
+    }
+    public String getCheckinName(){
+        return this.checkInName;
+    }
+    public void setCheckInName(String checkInName){
+        this.checkInName = checkInName;
+    }
+    public String getCode(){
+        return this.code;
+    }
+    public void setCode(String code){
+        this.code = code;
+    }
+    public Integer getRoomId(){
+        return this.roomId;
+    }
+    public void setRoomId(Integer roomId){
+        this.roomId= roomId;
+    }
 }
 
 

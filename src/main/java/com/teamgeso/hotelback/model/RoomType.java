@@ -40,7 +40,7 @@ public class RoomType implements Serializable {
 
     public void setPrice(double price) {this.price = price;}
 
-    public String getName() {return this.name;}
+    public String getName(String name) {return this.name;}
 
     public void setName( String name) { this.name = name;}
 
