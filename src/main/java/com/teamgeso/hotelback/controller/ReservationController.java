@@ -1,4 +1,5 @@
 package com.teamgeso.hotelback.controller;
+import com.teamgeso.hotelback.dao.DaoReservation;
 import com.teamgeso.hotelback.model.Reservation;
 import com.teamgeso.hotelback.dto.ReservationDTO;
 import com.teamgeso.hotelback.repository.ReservationRepository;
@@ -10,7 +11,7 @@ import java.util.Optional;
 @RequestMapping(path = "/reservations")
 @CrossOrigin(origins = "*")
 
-public class ReservationController {
+public class ReservationController implements DaoReservation {
 
     @Autowired
     private ReservationRepository reservationRepository;

@@ -1,5 +1,6 @@
 package com.teamgeso.hotelback.controller;
 
+import com.teamgeso.hotelback.dao.DaoRoomType;
 import com.teamgeso.hotelback.dto.RoomTypeDTO;
 import com.teamgeso.hotelback.model.RoomType;
 import com.teamgeso.hotelback.repository.RoomTypeRepository;
@@ -13,7 +14,7 @@ import java.util.Optional;
 @CrossOrigin(origins = "*")
 
 
-public class RoomTypeController {
+public class RoomTypeController implements DaoRoomType {
 
     @Autowired
     private RoomTypeRepository roomTypeRepository;
@@ -30,7 +31,7 @@ public class RoomTypeController {
     }
 
 
-    @PostMapping(value = "/add")
+    @PostMapping(value = "")
     @ResponseBody
     public Optional<RoomType> createRoomType(@RequestBody RoomTypeDTO roomType){
         RoomType roomTypeToSave = new RoomType();

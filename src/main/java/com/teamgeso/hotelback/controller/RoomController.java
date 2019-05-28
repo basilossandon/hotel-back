@@ -1,4 +1,5 @@
 package com.teamgeso.hotelback.controller;
+import com.teamgeso.hotelback.dao.DaoRoom;
 import com.teamgeso.hotelback.dto.RoomDTO;
 import com.teamgeso.hotelback.model.Room;
 import com.teamgeso.hotelback.repository.RoomRepository;
@@ -13,7 +14,7 @@ import java.util.Optional;
 @Validated
 @RequestMapping(path = "/rooms")
 @CrossOrigin(origins = "*")
-public class RoomController {
+public class RoomController implements DaoRoom {
     @Autowired
     private RoomRepository roomRepository;
     @GetMapping("")
