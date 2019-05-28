@@ -35,7 +35,7 @@ public class RoomTypeController {
     @ResponseBody
     public List<RoomType> createRoomType(@RequestBody RoomTypeDTO roomType){
         RoomType roomTypeToSave = new RoomType();
-        roomTypeToSave.getName(roomType.getName());
+        roomTypeToSave.setName(roomType.getName());
         roomTypeToSave.setPrice(roomType.getPrice());
                 roomTypeRepository.save(roomTypeToSave);
         return roomTypeRepository.findAll();
