@@ -6,15 +6,13 @@ import static org.junit.Assert.*;
 import com.teamgeso.hotelback.model.Reservation;
 import com.teamgeso.hotelback.model.Room;
 import com.teamgeso.hotelback.model.RoomType;
+import com.teamgeso.hotelback.dto.ReservationDTO;
+import com.teamgeso.hotelback.dto.RoomDTO;
+import com.teamgeso.hotelback.dto.RoomTypeDTO;
 
 import java.time.LocalDateTime;
 
 public class HotelbackApplicationTest {
-
-    @Test
-    public void main() {
-        // System.out.println("Test complete");
-    }
 
     @Test
     public void reservationModelTest(){
@@ -101,5 +99,62 @@ public class HotelbackApplicationTest {
         assertEquals(room.getCapacity(), capacity);
         assertEquals(room.getPrice(), price, 0.001);
         assertEquals(room.getRoomTypeId(), roomTypeId);
+    }
+
+    @Test
+    public void reservationDTOModelTest(){
+        LocalDateTime now = LocalDateTime.now();
+        LocalDateTime tomorrow = now.plusDays(1);
+        Double price = 10000.0;
+        String documentNumber = "1453241";
+        String checkInName = "Gabriel";
+        String code = "AX3400";
+        Integer room_id = 2;
+        ReservationDTO reservation = new ReservationDTO();
+
+        reservation.setStart(now);
+        reservation.setEnd(tomorrow);
+        reservation.setFinalPrice(price);
+        reservation.setDocumentNumber(documentNumber);
+        reservation.setCheckInName(checkInName);
+        reservation.setCode(code);
+        reservation.setRoomId(room_id);
+
+        assertEquals(reservation.getStart(), now);
+        assertEquals(reservation.getEnd(), tomorrow);
+        assertEquals(reservation.getFinalPrice(), price, 0.001);
+        assertEquals(documentNumber, reservation.getDocumentNumber());
+        assertEquals(checkInName, reservation.getCheckInName());
+        assertEquals(code, reservation.getCode());
+        assertEquals(reservation.getRoomId(), room_id);
+    }
+
+    @Test
+    public void roomDTOModelTest(){
+        Integer capacity = 2;
+        Double price = 10000.0;
+        Integer roomTypeId = 2;
+
+        RoomDTO room = new RoomDTO();
+        room.setCapacity(capacity);
+        room.setPrice(price);
+        room.setRoomTypeId(roomTypeId);
+
+        assertEquals(room.getCapacity(), capacity);
+        assertEquals(room.getPrice(), price, 0.001);
+        assertEquals(room.getRoomTypeId(), roomTypeId);
+    }
+
+    @Test
+    public void roomTypeDTOModelTest(){
+        Double price = 100000.0;
+        String name = "Matrimonial";
+
+        RoomTypeDTO room = new RoomTypeDTO();
+        room.setPrice(price);
+        room.setName(name);
+
+        assertEquals(room.getPrice(), price, 0.001);
+        assertEquals(room.getName(), name);
     }
 }
