@@ -1,4 +1,12 @@
-# hotel-back
+# Aplicación para TINGESO
+## Vistas
+1. Vista de despliegue
 
-A continuación se muestra la **vista de despliegue**
 ![Deployment View](/src/images/deploymentView.png)
+
+2. Vista Lógica
+![Logical View](/src/images/logicalView.png)
+
+## Modelo Entidad-Relación
+
+![Mer](/src/images/mer.png)
