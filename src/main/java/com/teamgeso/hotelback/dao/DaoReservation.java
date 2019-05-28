@@ -13,4 +13,6 @@ public interface DaoReservation {
     Optional<Reservation> getReservationById(Integer id);
 
     Optional<Reservation> createReservation(ReservationDTO reservation);
+    Optional<Reservation> updateReservation(Integer id, ReservationDTO reservation);
+    Iterable<Reservation> deleteReservation(Integer id);
 }

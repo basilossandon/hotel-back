@@ -39,4 +39,24 @@ public class RoomController implements DaoRoom {
         roomRepository.save(roomToSave);
         return roomRepository.findById(roomToSave.getId());
     }
+
+    @PostMapping(value = "/{id}")
+    public @ResponseBody
+    Optional<Room> updateRoom(@PathVariable Integer id, @RequestBody RoomDTO room){
+        Room updatedRoom = new Room();
+        updatedRoom.setCapacity(room.getCapacity());
+        updatedRoom.setPrice(room.getPrice());
+        updatedRoom.setRoomTypeId(room.getRoomTypeId());
+        updatedRoom.setId(id);
+        roomRepository.save(updatedRoom);
+        return roomRepository.findById(updatedRoom.getId());
+
+    }
+
+    @PostMapping(value = "/{id}/delete")
+    public @ResponseBody
+    Iterable<Room> deleteRoom(@PathVariable Integer id){
+        roomRepository.deleteById(id);
+        return roomRepository.findAll();
+    }
 }
