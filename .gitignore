@@ -2,6 +2,7 @@ HELP.md
 !/target/
 /target/*
 !/target/surefire-reports
+!/target/jacoco.exec
 
 
 !.mvn/wrapper/maven-wrapper.jar
