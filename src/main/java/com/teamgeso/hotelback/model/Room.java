@@ -30,7 +30,7 @@ public class Room implements Serializable {
     public Room(){
     }
     public Integer getId() {
-        return id;
+        return this.id;
     }
 
     public void setId(Integer id) {
@@ -38,7 +38,7 @@ public class Room implements Serializable {
     }
 
     public Integer getCapacity() {
-        return capacity;
+        return this.capacity;
     }
 
     public void setCapacity(Integer capacity) {
@@ -46,18 +46,18 @@ public class Room implements Serializable {
     }
 
     public Double getPrice() {
-        return price;
+        return this.price;
     }
 
     public void setPrice(Double price) {
         this.price = price;
     }
 
-    public int getRoomTypeId() {
-        return roomTypeId;
+    public Integer getRoomTypeId() {
+        return this.roomTypeId;
     }
 
-    public void setRoomTypeId(int roomTypeId) {
+    public void setRoomTypeId(Integer roomTypeId) {
         this.roomTypeId = roomTypeId;
     }
 

@@ -20,11 +20,11 @@ public class RoomDTO {
         this.price = price;
     }
 
-    public int getRoomTypeId() {
+    public Integer getRoomTypeId() {
         return roomTypeId;
     }
 
-    public void setRoomTypeId(int roomTypeId) {
+    public void setRoomTypeId(Integer roomTypeId) {
         this.roomTypeId = roomTypeId;
     }
 
