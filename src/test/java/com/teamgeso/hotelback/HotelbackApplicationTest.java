@@ -20,17 +20,21 @@ public class HotelbackApplicationTest {
     public void reservationTest(){
     	Integer id = 1;
     	Integer room_id = 2;
+    	Double price = 10000.0;
+    	String documentNumber = "1453241";
+    	String checkInName = "Gabriel";
+    	String code = "AX3400";
     	LocalDateTime now = LocalDateTime.now();
     	LocalDateTime tomorrow = now.plusDays(1);
-    	Reservation reservation = new Reservation(id, now, tomorrow, 10000.0, "1453241", "Gabriel", "AX3400", room_id);
+    	Reservation reservation = new Reservation(id, now, tomorrow, price, documentNumber, checkInName, code, room_id);
 
     	assertEquals(reservation.getId(), id);
     	assertEquals(reservation.getStart(), now);
     	assertEquals(reservation.getEnd(), tomorrow);
-    	assertEquals(reservation.getFinalPrice(), 10000.0, 0.001);
-    	assertEquals(reservation.getDocumentNumber(), "1453241");
-    	assertEquals(reservation.getCheckinName(), "Gabriel");
-    	assertEquals(reservation.getCode(), "AX3400");
+    	assertEquals(reservation.getFinalPrice(), price, 0.001);
+    	assertEquals(documentNumber, reservation.getDocumentNumber());
+    	assertEquals(checkInName, reservation.getCheckinName());
+    	assertEquals(code, reservation.getCode());
     	assertEquals(reservation.getRoomId(), room_id);
     }
 }
