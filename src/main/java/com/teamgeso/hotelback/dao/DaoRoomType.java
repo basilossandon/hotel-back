@@ -10,4 +10,6 @@ public interface DaoRoomType {
     Iterable<RoomType> getAll();
     Optional<RoomType> getRoomTypeById(Integer id);
     Optional<RoomType> createRoomType(RoomTypeDTO roomType);
+    Optional<RoomType> updateRoomType(Integer id, RoomTypeDTO roomType);
+    List<RoomType> deleteRoomType(Integer id);
 }
