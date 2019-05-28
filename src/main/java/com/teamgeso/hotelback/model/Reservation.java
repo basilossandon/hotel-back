@@ -1,7 +1,4 @@
 package com.teamgeso.hotelback.model;
-
-
-
 import javax.persistence.*;
 import java.io.Serializable;
 import java.time.LocalDateTime;
