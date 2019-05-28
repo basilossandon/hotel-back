@@ -9,4 +9,4 @@
 
 ## Modelo Entidad-Relación
 
-![Mer](/src/images/mer.png)
+![MER](/src/images/entityRelationshipModel.png)
