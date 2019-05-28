@@ -34,11 +34,11 @@ public class Reservation implements Serializable {
     public Reservation( Integer id,
                         LocalDateTime start,
                         LocalDateTime end,
-                        double  final_price,
-                        String document_number,
-                        String checkin_name,
+                        double  finalPrice,
+                        String documentNumber,
+                        String checkInName,
                         String code,
-                        Integer room_id){
+                        Integer roomId){
         this.id = id;
         this.start = start;
         this.end = end;
