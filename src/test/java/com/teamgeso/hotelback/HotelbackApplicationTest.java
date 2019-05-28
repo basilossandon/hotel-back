@@ -13,25 +13,24 @@ public class HotelbackApplicationTest {
 
     @Test
     public void main() {
-        System.out.println("Test complete");
+        // System.out.println("Test complete");
     }
 
     @Test
     public void reservationTest(){
+    	Integer id = 1;
+    	Integer room_id = 2;
     	LocalDateTime now = LocalDateTime.now();
     	LocalDateTime tomorrow = now.plusDays(1);
-    	Reservation reservation = new Reservation(1, now, tomorrow, 10000.0, "1453241", "Gabriel", "AX3400", 2);
+    	Reservation reservation = new Reservation(id, now, tomorrow, 10000.0, "1453241", "Gabriel", "AX3400", room_id);
 
-    	if (reservation.getId() != 1 && 
-    		! reservation.getStart().equals(now) &&
-    		! reservation.getEnd().equals(tomorrow) &&
-    		reservation.getFinalPrice() != 10000.0 &&
-    		! reservation.getDocumentNumber().equals("1453241") &&
-    		! reservation.getCheckinName().equals("Gabriel") &&
-    		! reservation.getCode().equals("AX3400") &&
-    		reservation.getRoomId() != 2) {
-
-    		fail("Reservation model not working properly.");
-    	}
+    	assertEquals(reservation.getId(), id);
+    	assertEquals(reservation.getStart(), now);
+    	assertEquals(reservation.getEnd(), tomorrow);
+    	assertEquals(reservation.getFinalPrice(), 10000.0, 0.001);
+    	assertEquals(reservation.getDocumentNumber(), "1453241");
+    	assertEquals(reservation.getCheckinName(), "Gabriel");
+    	assertEquals(reservation.getCode(), "AX3400");
+    	assertEquals(reservation.getRoomId(), room_id);
     }
 }
