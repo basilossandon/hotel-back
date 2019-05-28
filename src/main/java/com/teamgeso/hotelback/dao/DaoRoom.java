@@ -11,4 +11,6 @@ public interface DaoRoom {
     List<Room> getAllRooms();
     Room getRoomById(Integer id);
     Optional<Room> createRoom(RoomDTO room);
+    Optional<Room> updateRoom(Integer id,RoomDTO room);
+    Iterable<Room> deleteRoom(Integer id);
 }
