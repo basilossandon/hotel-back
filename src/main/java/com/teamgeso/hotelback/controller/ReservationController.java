@@ -27,7 +27,7 @@ public class ReservationController implements DaoReservation {
         return reservationRepository.findById(id);
     }
 
-    @PostMapping(value = "/")
+    @PostMapping(value = "")
     public @ResponseBody
     Optional<Reservation> createReservation(@RequestBody ReservationDTO reservation){
         //Here you must to add a try catch, if the reservation given on the argument has an error.

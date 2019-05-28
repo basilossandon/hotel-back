@@ -13,8 +13,6 @@ import java.util.Optional;
 @RestController
 @RequestMapping(path = "/room_types")
 @CrossOrigin(origins = "*")
-
-
 public class RoomTypeController implements DaoRoomType {
 
     @Autowired
