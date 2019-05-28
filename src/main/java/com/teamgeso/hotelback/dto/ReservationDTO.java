@@ -31,7 +31,7 @@ public class ReservationDTO {
     	return this.finalPrice;
     }
 
-    public void setFinalPrice(double final_price){
+    public void setFinalPrice(double finalPrice){
         this.finalPrice = finalPrice;
     }
 

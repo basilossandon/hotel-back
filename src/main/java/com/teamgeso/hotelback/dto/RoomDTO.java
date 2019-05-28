@@ -1,7 +1,4 @@
 package com.teamgeso.hotelback.dto;
-
-import java.time.LocalDateTime;
-
 public class RoomDTO {
     private Integer capacity;
     private Double price;
