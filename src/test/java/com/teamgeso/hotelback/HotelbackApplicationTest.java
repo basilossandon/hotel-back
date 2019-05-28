@@ -17,7 +17,7 @@ public class HotelbackApplicationTest {
     }
 
     @Test
-    public void reservationTest(){
+    public void reservationModelTest(){
     	Integer id = 1;
     	Integer room_id = 2;
     	Double price = 10000.0;
@@ -36,5 +36,70 @@ public class HotelbackApplicationTest {
     	assertEquals(checkInName, reservation.getCheckinName());
     	assertEquals(code, reservation.getCode());
     	assertEquals(reservation.getRoomId(), room_id);
+    }
+
+    @Test
+    public void reservationModelTest2(){
+        Integer id = 1;
+        LocalDateTime now = LocalDateTime.now();
+        LocalDateTime tomorrow = now.plusDays(1);
+        Double price = 10000.0;
+        String documentNumber = "1453241";
+        String checkInName = "Gabriel";
+        String code = "AX3400";
+        Integer room_id = 2;
+        Reservation reservation = new Reservation();
+
+        reservation.setId(id);
+        reservation.setStart(now);
+        reservation.setEnd(tomorrow);
+        reservation.setFinalPrice(price);
+        reservation.setDocumentNumber(documentNumber);
+        reservation.setCheckInName(checkInName);
+        reservation.setCode(code);
+        reservation.setRoomId(room_id);
+
+        assertEquals(reservation.getId(), id);
+        assertEquals(reservation.getStart(), now);
+        assertEquals(reservation.getEnd(), tomorrow);
+        assertEquals(reservation.getFinalPrice(), price, 0.001);
+        assertEquals(documentNumber, reservation.getDocumentNumber());
+        assertEquals(checkInName, reservation.getCheckinName());
+        assertEquals(code, reservation.getCode());
+        assertEquals(reservation.getRoomId(), room_id);
+    }
+    
+    @Test    
+    public void roomModelTest(){
+        Integer id = 1;
+        Integer capacity = 2;
+        Double price = 10000.0;
+        Integer roomTypeId = 2;
+
+        Room room = new Room(id, capacity, price, roomTypeId);
+
+        assertEquals(room.getId(), id);
+        assertEquals(room.getCapacity(), capacity);
+        assertEquals(room.getPrice(), price, 0.001);
+        assertEquals(room.getRoomTypeId(), roomTypeId);
+    }
+    
+    @Test
+    public void roomModelTest2(){
+        Integer id = 1;
+        Integer capacity = 2;
+        Double price = 10000.0;
+        Integer roomTypeId = 2;
+
+        Room room = new Room();
+        room.setId(id);
+        room.setCapacity(capacity);
+        room.setPrice(price);
+        room.setRoomTypeId(roomTypeId);
+
+        assertEquals(room.getId(), id);
+        assertEquals(room.getCapacity(), capacity);
+        assertEquals(room.getPrice(), price, 0.001);
+        assertEquals(room.getRoomTypeId(), roomTypeId);
     }
 }
