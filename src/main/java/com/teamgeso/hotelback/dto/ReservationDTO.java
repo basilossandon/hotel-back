@@ -5,11 +5,11 @@ import java.time.LocalDateTime;
 public class ReservationDTO {
     private LocalDateTime start;
     private LocalDateTime end;
-    private double final_price;
-    private String document_number;
+    private double finalPrice;
+    private String documentNumber;
     private String checkInName;
     private String code;
-    private Integer room_id;
+    private Integer roomId;
 
     public LocalDateTime getStart() {
         return this.start;
@@ -28,19 +28,19 @@ public class ReservationDTO {
     }
 
     public double getFinalPrice() {
-    	return this.final_price;
+    	return this.finalPrice;
     }
 
     public void setFinalPrice(double final_price){
-        this.final_price = final_price;
+        this.finalPrice = finalPrice;
     }
 
     public String getDocumentNumber(){
-    	return this.document_number;
+    	return this.documentNumber;
 	}
 
-    public void setDocumentNumber(String document_number){
-    	this.document_number = document_number;
+    public void setDocumentNumber(String documentNumber){
+    	this.documentNumber = documentNumber;
 	}
 
     public String getCheckInName(){
@@ -60,10 +60,10 @@ public class ReservationDTO {
 	}
 
     public Integer getRoomId(){
-    	return this.room_id;
+    	return this.roomId;
 	}
 
-    public void setRoomId(Integer room_id){
-    	this.room_id = room_id;
+    public void setRoomId(Integer roomId){
+    	this.roomId = roomId;
 	}
 }
