@@ -20,15 +20,15 @@ public class Reservation implements Serializable {
     @Column(name = "end", nullable = false)
     private LocalDateTime end;
     @Column(name = "final_price", nullable = false)
-    private double final_price;
+    private double finalPrice;
     @Column(name = "document_number", nullable = false)
-    private String document_number;
+    private String documentNumber;
     @Column(name = "checkin_name", nullable = false)
-    private String checkin_name;
+    private String checkInName;
     @Column(name = "code", nullable = false)
     private String code;
     @Column(name = "room_id", nullable = false)
-    private Integer room_id;
+    private Integer roomId;
 
 
     public Reservation( Integer id,
@@ -42,11 +42,11 @@ public class Reservation implements Serializable {
         this.id = id;
         this.start = start;
         this.end = end;
-        this.final_price= final_price;
-        this.document_number = document_number;
-        this.checkin_name = checkin_name;
+        this.finalPrice= finalPrice;
+        this.documentNumber = documentNumber;
+        this.checkInName = checkInName;
         this.code = code;
-        this.room_id = room_id;
+        this.roomId = roomId;
     }
 
     public Reservation(){
@@ -74,27 +74,27 @@ public class Reservation implements Serializable {
         this.end = end;
     }
 
-    public double getFinalPrice() { return this.final_price; }
+    public double getFinalPrice() { return this.finalPrice; }
 
-    public void setFinalPrice(double final_price){
-        this.final_price = final_price;
+    public void setFinalPrice(double finalPrice){
+        this.finalPrice = finalPrice;
     }
 
-    public String getDocumentNumber(){ return this.document_number;}
+    public String getDocumentNumber(){ return this.documentNumber;}
 
-    public void setDocumentNumber(String document_number){this.document_number = document_number;}
+    public void setDocumentNumber(String documentNumber){this.documentNumber = documentNumber;}
 
-    public String getCheckinName(){return this.checkin_name;}
+    public String getCheckinName(){return this.checkInName;}
 
-    public void setCheckInName(String checkin_name){this.checkin_name = checkin_name;}
+    public void setCheckInName(String checkInName){this.checkInName = checkInName;}
 
     public String getCode(){return this.code;}
 
     public void setCode(String code){this.code = code;}
 
-    public Integer getRoomId(){return this.room_id;}
+    public Integer getRoomId(){return this.roomId;}
 
-    public void setRoomId(Integer room_id){this.room_id= room_id;}
+    public void setRoomId(Integer roomId){this.roomId= roomId;}
 }
 
 

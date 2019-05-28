@@ -15,16 +15,16 @@ public class Room implements Serializable {
     @Column(name = "price", nullable = false)
     private Double price;
     @Column(name = "room_type_id", nullable = false)
-    private Integer room_type_id;
+    private Integer roomTypeId;
 
     public Room(Integer id,
                 Integer  capacity,
                 Double  price,
-                Integer  room_type_id){
+                Integer  roomTypeId){
         this.id = id;
         this.capacity = capacity;
         this.price = price;
-        this.room_type_id = room_type_id;
+        this.roomTypeId = roomTypeId;
     }
 
     public Room(){
@@ -54,11 +54,11 @@ public class Room implements Serializable {
     }
 
     public int getRoomTypeId() {
-        return room_type_id;
+        return roomTypeId;
     }
 
-    public void setRoomTypeId(int room_type_id) {
-        this.room_type_id = room_type_id;
+    public void setRoomTypeId(int roomTypeId) {
+        this.roomTypeId = roomTypeId;
     }
 
 }
