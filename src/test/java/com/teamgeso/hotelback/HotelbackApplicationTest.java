@@ -101,6 +101,36 @@ public class HotelbackApplicationTest {
         assertEquals(room.getRoomTypeId(), roomTypeId);
     }
 
+    @Test    
+    public void roomTypeModelTest(){
+        Integer id = 1;
+        String name = "Matrimonial";
+        Double price = 100000.0;
+
+        RoomType room = new RoomType(id, price, name);
+
+        assertEquals(room.getId(), id);
+        assertEquals(room.getName(), name);
+        assertEquals(room.getPrice(), price, 0.001);
+    }
+
+    @Test    
+    public void roomTypeModelTest2(){
+        Integer id = 1;
+        String name = "Matrimonial";
+        Double price = 100000.0;
+
+        RoomType room = new RoomType();
+
+        room.setId(id);
+        room.setName(name);
+        room.setPrice(price);
+
+        assertEquals(room.getId(), id);
+        assertEquals(room.getName(), name);
+        assertEquals(room.getPrice(), price, 0.001);
+    }
+
     @Test
     public void reservationDTOModelTest(){
         LocalDateTime now = LocalDateTime.now();

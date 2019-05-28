@@ -29,7 +29,7 @@ public class RoomType implements Serializable {
     }
 
     public Integer getId() {
-        return id;
+        return this.id;
     }
 
     public void setId(Integer id) {
@@ -37,7 +37,7 @@ public class RoomType implements Serializable {
     }
 
     public double getPrice() {
-        return price;
+        return this.price;
     }
 
     public void setPrice(double price) {
@@ -45,7 +45,7 @@ public class RoomType implements Serializable {
     }
 
     public String getName() {
-        return name;
+        return this.name;
     }
 
     public void setName( String name) {
