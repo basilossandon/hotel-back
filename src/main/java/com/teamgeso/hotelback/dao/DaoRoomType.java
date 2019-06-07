@@ -3,12 +3,14 @@ package com.teamgeso.hotelback.dao;
 import com.teamgeso.hotelback.dto.RoomTypeDTO;
 import com.teamgeso.hotelback.model.RoomType;
 
+import org.springframework.http.ResponseEntity;
+
 import java.util.Optional;
 
 public interface DaoRoomType {
     Iterable<RoomType> getAll();
     Optional<RoomType> getRoomTypeById(Integer id);
-    Optional<RoomType> createRoomType(RoomTypeDTO roomType);
-    Optional<RoomType> updateRoomType(Integer id, RoomTypeDTO roomType);
-    Iterable<RoomType> deleteRoomType(Integer id);
+    ResponseEntity createRoomType(RoomTypeDTO roomType);
+    ResponseEntity updateRoomType(Integer id, RoomTypeDTO roomType);
+    ResponseEntity deleteRoomType(Integer id);
 }

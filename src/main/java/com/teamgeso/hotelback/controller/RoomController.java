@@ -6,6 +6,8 @@ import com.teamgeso.hotelback.repository.RoomRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.http.ResponseEntity;
+import org.springframework.http.HttpStatus;
 
 import java.util.List;
 import java.util.Optional;
@@ -17,6 +19,7 @@ import java.util.Optional;
 public class RoomController implements DaoRoom {
     @Autowired
     private RoomRepository roomRepository;
+
     @GetMapping("")
     @ResponseBody
     public List<Room> getAllRooms() {
@@ -31,32 +34,51 @@ public class RoomController implements DaoRoom {
 
     @PostMapping(value = "")
     public @ResponseBody
-    Optional<Room> createRoom(@RequestBody RoomDTO room){
-        Room roomToSave = new Room();
-        roomToSave.setCapacity(room.getCapacity());
-        roomToSave.setPrice(room.getPrice());
-        roomToSave.setRoomTypeId(room.getRoomTypeId());
-        roomRepository.save(roomToSave);
-        return roomRepository.findById(roomToSave.getId());
+    ResponseEntity createRoom(@RequestBody RoomDTO room){
+        Room createdRoom = new Room();
+        createdRoom.setPrice(room.getPrice());
+        createdRoom.setRoomTypeId(room.getRoomTypeId());
+
+        if (createdRoom.getPrice() != null && createdRoom.getRoomTypeId() != null){
+            if (createdRoom.getPrice() < 0)
+                return new ResponseEntity<>("El valor de la habitación es menor a 0.", HttpStatus.BAD_REQUEST);
+
+            return new ResponseEntity<>(roomRepository.save(createdRoom),HttpStatus.CREATED);
+        }
+
+        return new ResponseEntity<>("La habitación a crear no puede contener valores nulos.", HttpStatus.BAD_REQUEST);
     }
 
-    @PostMapping(value = "/{id}")
+    @PutMapping(value = "/{id}")
     public @ResponseBody
-    Optional<Room> updateRoom(@PathVariable Integer id, @RequestBody RoomDTO room){
-        Room updatedRoom = new Room();
-        updatedRoom.setCapacity(room.getCapacity());
-        updatedRoom.setPrice(room.getPrice());
-        updatedRoom.setRoomTypeId(room.getRoomTypeId());
-        updatedRoom.setId(id);
-        roomRepository.save(updatedRoom);
-        return roomRepository.findById(updatedRoom.getId());
+    ResponseEntity updateRoom(@PathVariable Integer id, @RequestBody RoomDTO room){
+        Room roomToUpdate = roomRepository.findRoomById(id);
+        if (roomToUpdate == null)
+            return new ResponseEntity<>("La habitación a editar no se ha podido encontrar.", HttpStatus.BAD_REQUEST);
 
+        roomToUpdate.setPrice(room.getPrice());
+        roomToUpdate.setRoomTypeId(room.getRoomTypeId());
+
+        if (roomToUpdate.getPrice() != null && roomToUpdate.getRoomTypeId() != null){
+            if (roomToUpdate.getPrice() < 0)
+                return new ResponseEntity<>("El valor de la habitación es menor a 0.", HttpStatus.BAD_REQUEST);
+
+            return new ResponseEntity<>(roomRepository.save(roomToUpdate),HttpStatus.CREATED);
+        }
+
+        return new ResponseEntity<>("Un valor no puede ser modificado por un valor nulo.", HttpStatus.BAD_REQUEST);
     }
 
     @PostMapping(value = "/{id}/delete")
     public @ResponseBody
-    Iterable<Room> deleteRoom(@PathVariable Integer id){
-        roomRepository.deleteById(id);
-        return roomRepository.findAll();
+    ResponseEntity deleteRoom(@PathVariable Integer id){
+        Room roomToDelete = roomRepository.findRoomById(id);
+        
+        if (roomToDelete != null){
+            roomRepository.deleteById(id);
+            return new ResponseEntity<>("Borrado exitosamente",HttpStatus.OK);
+        }
+
+        return new ResponseEntity<>("La habitación a borrar no existe.", HttpStatus.BAD_REQUEST);
     }
 }

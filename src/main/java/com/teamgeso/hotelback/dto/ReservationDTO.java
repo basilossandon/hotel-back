@@ -5,11 +5,10 @@ import java.time.LocalDateTime;
 public class ReservationDTO {
     private LocalDateTime start;
     private LocalDateTime end;
-    private double finalPrice;
+    private Double finalPrice;
     private String documentNumber;
     private String checkInName;
     private String code;
-    private Integer roomId;
 
     public LocalDateTime getStart() {
         return this.start;
@@ -27,11 +26,11 @@ public class ReservationDTO {
         this.end = end;
     }
 
-    public double getFinalPrice() {
+    public Double getFinalPrice() {
     	return this.finalPrice;
     }
 
-    public void setFinalPrice(double finalPrice){
+    public void setFinalPrice(Double finalPrice){
         this.finalPrice = finalPrice;
     }
 
@@ -57,13 +56,5 @@ public class ReservationDTO {
 
     public void setCode(String code){
     	this.code = code;
-	}
-
-    public Integer getRoomId(){
-    	return this.roomId;
-	}
-
-    public void setRoomId(Integer roomId){
-    	this.roomId = roomId;
 	}
 }

@@ -2,27 +2,31 @@ package com.teamgeso.hotelback.model;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.HashSet;
+import java.util.Set;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 
 @Entity
 @Table(name="room")
 public class Room implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(nullable = false)
+    @Column(name = "room_id", nullable = false)
     private Integer id;
-    @Column(name = "capacity", nullable = false)
-    private Integer capacity;
     @Column(name = "price", nullable = false)
     private Double price;
     @Column(name = "room_type_id", nullable = false)
     private Integer roomTypeId;
 
+    @ManyToMany(mappedBy = "rooms")
+    @JsonIgnore
+    private Set<Reservation> reservations = new HashSet<Reservation>();
+
     public Room(Integer id,
-                Integer  capacity,
                 Double  price,
                 Integer  roomTypeId){
         this.id = id;
-        this.capacity = capacity;
         this.price = price;
         this.roomTypeId = roomTypeId;
     }
@@ -35,14 +39,6 @@ public class Room implements Serializable {
 
     public void setId(Integer id) {
         this.id = id;
-    }
-
-    public Integer getCapacity() {
-        return this.capacity;
-    }
-
-    public void setCapacity(Integer capacity) {
-        this.capacity = capacity;
     }
 
     public Double getPrice() {
@@ -59,6 +55,14 @@ public class Room implements Serializable {
 
     public void setRoomTypeId(Integer roomTypeId) {
         this.roomTypeId = roomTypeId;
+    }
+
+    public Set<Reservation> getReservations(){
+        return this.reservations;
+    }
+
+    public void setReservations(Set<Reservation> reservations){
+        this.reservations = reservations;
     }
 
 }

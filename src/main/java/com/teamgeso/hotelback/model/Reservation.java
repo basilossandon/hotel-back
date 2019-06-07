@@ -1,7 +1,12 @@
 package com.teamgeso.hotelback.model;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import java.io.Serializable;
 import java.time.LocalDateTime;
+import java.util.HashSet;
+import java.util.Set;
+
 
 @Entity
 @Table(name = "reservation")
@@ -9,32 +14,36 @@ import java.time.LocalDateTime;
 public class Reservation implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(nullable = false)
+    @Column(name = "reservation_id", nullable = false)
     private Integer id;
     @Column(name = "start", nullable = false)
     private LocalDateTime start;
     @Column(name = "end", nullable = false)
     private LocalDateTime end;
     @Column(name = "final_price", nullable = false)
-    private double finalPrice;
+    private Double finalPrice;
     @Column(name = "document_number", nullable = false)
     private String documentNumber;
     @Column(name = "checkin_name", nullable = false)
     private String checkInName;
     @Column(name = "code", nullable = false)
     private String code;
-    @Column(name = "room_id", nullable = false)
-    private Integer roomId;
+
+    @ManyToMany(cascade = {CascadeType.ALL})
+    @JsonIgnore
+    @JoinTable(name="reservation_room",
+            joinColumns={@JoinColumn(name="reservation_id")},
+            inverseJoinColumns={@JoinColumn(name="room_id")})
+    private Set<Room> rooms =new HashSet<Room>();
 
 
     public Reservation( Integer id,
                         LocalDateTime start,
                         LocalDateTime end,
-                        double  finalPrice,
+                        Double  finalPrice,
                         String documentNumber,
                         String checkInName,
-                        String code,
-                        Integer roomId){
+                        String code){
         this.id = id;
         this.start = start;
         this.end = end;
@@ -42,7 +51,6 @@ public class Reservation implements Serializable {
         this.documentNumber = documentNumber;
         this.checkInName = checkInName;
         this.code = code;
-        this.roomId = roomId;
     }
 
     public Reservation(){
@@ -66,10 +74,10 @@ public class Reservation implements Serializable {
     public void setEnd(LocalDateTime end) {
         this.end = end;
     }
-    public double getFinalPrice() {
+    public Double getFinalPrice() {
         return this.finalPrice;
     }
-    public void setFinalPrice(double finalPrice){
+    public void setFinalPrice(Double finalPrice){
         this.finalPrice = finalPrice;
     }
     public String getDocumentNumber(){
@@ -78,7 +86,7 @@ public class Reservation implements Serializable {
     public void setDocumentNumber(String documentNumber){
         this.documentNumber = documentNumber;
     }
-    public String getCheckinName(){
+    public String getCheckInName(){
         return this.checkInName;
     }
     public void setCheckInName(String checkInName){
@@ -90,11 +98,11 @@ public class Reservation implements Serializable {
     public void setCode(String code){
         this.code = code;
     }
-    public Integer getRoomId(){
-        return this.roomId;
+    public Set<Room> getRooms(){
+        return this.rooms;
     }
-    public void setRoomId(Integer roomId){
-        this.roomId= roomId;
+    public void setRooms(Set<Room> rooms){
+        this.rooms = rooms;
     }
 }
 
