@@ -23,6 +23,10 @@ public class Room implements Serializable {
     @JsonIgnore
     private Set<Reservation> reservations = new HashSet<Reservation>();
 
+    @ManyToMany(mappedBy = "rooms")
+    @JsonIgnore
+    private Set<Service> services = new HashSet<Service>();
+
     public Room(Integer id,
                 Double  price,
                 Integer  roomTypeId){
@@ -63,6 +67,14 @@ public class Room implements Serializable {
 
     public void setReservations(Set<Reservation> reservations){
         this.reservations = reservations;
+    }
+
+    public Set<Service> getServices(){
+        return this.services;
+    }
+
+    public void setServices(Set<Service> services){
+        this.services = services;
     }
 
 }
