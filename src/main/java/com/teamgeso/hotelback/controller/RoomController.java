@@ -1,8 +1,12 @@
 package com.teamgeso.hotelback.controller;
+
 import com.teamgeso.hotelback.dao.DaoRoom;
 import com.teamgeso.hotelback.dto.RoomDTO;
 import com.teamgeso.hotelback.model.Room;
+import com.teamgeso.hotelback.model.Service;
 import com.teamgeso.hotelback.repository.RoomRepository;
+import com.teamgeso.hotelback.repository.ServiceRepository;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
@@ -19,6 +23,8 @@ import java.util.Optional;
 public class RoomController implements DaoRoom {
     @Autowired
     private RoomRepository roomRepository;
+    @Autowired
+    private ServiceRepository serviceRepository;
 
     @GetMapping("")
     @ResponseBody
@@ -84,13 +90,13 @@ public class RoomController implements DaoRoom {
 
     @PostMapping("/{id}/services/{idService}")
     @ResponseBody
-    public HttpStatus linkServiceToRoom (@PathVariable("id") Integer id, @PathVariable("idService") Integer idService) {
+    public ResponseEntity linkServiceToRoom (@PathVariable("id") Integer id, @PathVariable("idService") Integer idService) {
 
-        Reservation service = reservationRepository.findServiceById(id);
-        Room room = roomRepository.findRoomById(idRoom);
+        Service service = serviceRepository.findServiceById(id);
+        Room room = roomRepository.findRoomById(idService);
 
         if (service != null && room != null) {
-            room.getReservations().add(service);
+            room.getServices().add(service);
             service.getRooms().add(room);
             roomRepository.save(room);
             return new ResponseEntity<>("Se ha asignado el servicio a la habitación correctamente.", HttpStatus.OK);
