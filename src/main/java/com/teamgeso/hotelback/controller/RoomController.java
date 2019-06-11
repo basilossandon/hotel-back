@@ -81,4 +81,21 @@ public class RoomController implements DaoRoom {
 
         return new ResponseEntity<>("La habitación a borrar no existe.", HttpStatus.BAD_REQUEST);
     }
+
+    @PostMapping("/{id}/services/{idService}")
+    @ResponseBody
+    public HttpStatus linkServiceToRoom (@PathVariable("id") Integer id, @PathVariable("idService") Integer idService) {
+
+        Reservation service = reservationRepository.findServiceById(id);
+        Room room = roomRepository.findRoomById(idRoom);
+
+        if (service != null && room != null) {
+            room.getReservations().add(service);
+            service.getRooms().add(room);
+            roomRepository.save(room);
+            return new ResponseEntity<>("Se ha asignado el servicio a la habitación correctamente.", HttpStatus.OK);
+        }
+        
+        return new ResponseEntity<>("El servicio o la habitación no se han encontado. No se pudo reservar.", HttpStatus.NOT_ACCEPTABLE);
+    }
 }
