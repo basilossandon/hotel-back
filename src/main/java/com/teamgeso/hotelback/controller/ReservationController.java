@@ -55,6 +55,7 @@ public class ReservationController implements DaoReservation {
 
             if (createdReservation.getStart().isAfter(createdReservation.getEnd()))
                 return new ResponseEntity<>("La fecha de inicio no puede ser posterior a la fecha de termino.", HttpStatus.BAD_REQUEST);
+            
             if (createdReservation.getFinalPrice() < 0)
                 return new ResponseEntity<>("El precio final asociado a la reserva no puede ser menor a 0", HttpStatus.BAD_REQUEST);
 
@@ -113,18 +114,32 @@ public class ReservationController implements DaoReservation {
 
     @PostMapping("/{id}/rooms/{idRoom}")
     @ResponseBody
-    public HttpStatus linkRoomToReservation (@PathVariable("id") Integer id, @PathVariable("idRoom") Integer idRoom) {
+    public ResponseEntity linkRoomToReservation (@PathVariable("id") Integer id, @PathVariable("idRoom") Integer idRoom) {
 
         Reservation reservation = reservationRepository.findReservationById(id);
         Room room = roomRepository.findRoomById(idRoom);
+
         if (reservation != null && room != null) {
-            room.getReservations().add(reservation);
+            for (Reservation roomReservation : room.getReservations()){
+                if (reservation.getEnd().isAfter(roomReservation.getStart()) && reservation.getEnd().isBefore(roomReservation.getEnd()))
+                    return new ResponseEntity<>("El fin de la reserva se encuentra entre una reserva ya solicitada.", HttpStatus.BAD_REQUEST);
+
+                // I think that this else if is not necessary, but im not totally sure yet, so I will comment it.
+                // else if (reservation.getStart().isAfter(roomReservation.getStart()) && reservation.getEnd().isBefore(roomReservation.getEnd()))
+                    // return new ResponseEntity<>("La reserva se encuentra entre una reserva ya solicitada.", HttpStatus.BAD_REQUEST);
+
+                else if (reservation.getStart().isAfter(roomReservation.getStart()) && reservation.getStart().isBefore(roomReservation.getEnd()))
+                    return new ResponseEntity<>("El inicio de la reserva se encuentra entre una reserva ya solicitada.", HttpStatus.BAD_REQUEST);
+            }
+
             reservation.getRooms().add(room);
+            room.getReservations().add(reservation);
             roomRepository.save(room);
-            return HttpStatus.OK;
+
+            return new ResponseEntity<>("La reserva se ha asignado correctamente a la habitación", HttpStatus.OK);
         }
-        else
-            return HttpStatus.NOT_ACCEPTABLE;
+
+        return new ResponseEntity<>("La habitación y/o la reserva no se han encontrado.", HttpStatus.NOT_ACCEPTABLE);
     }
 
 }
