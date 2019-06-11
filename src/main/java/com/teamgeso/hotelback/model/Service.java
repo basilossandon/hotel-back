@@ -24,7 +24,7 @@ public class Service implements Serializable {
     @JoinTable(name="room_service",
             joinColumns={@JoinColumn(name="room_id")},
             inverseJoinColumns={@JoinColumn(name="service_id")})
-    private Set<Room> rooms =new HashSet<Room>();
+    private Set<Room> rooms =new HashSet<>();
 
     public Service(Integer id,
                 Double  price,

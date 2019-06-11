@@ -21,11 +21,11 @@ public class Room implements Serializable {
 
     @ManyToMany(mappedBy = "rooms")
     @JsonIgnore
-    private Set<Reservation> reservations = new HashSet<Reservation>();
+    private Set<Reservation> reservations = new HashSet<>();
 
     @ManyToMany(mappedBy = "rooms")
     @JsonIgnore
-    private Set<Service> services = new HashSet<Service>();
+    private Set<Service> services = new HashSet<>();
 
     public Room(Integer id,
                 Double  price,
