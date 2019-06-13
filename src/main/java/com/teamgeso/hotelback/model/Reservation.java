@@ -6,6 +6,8 @@ import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.util.HashSet;
 import java.util.Set;
+import java.util.List;
+import java.util.ArrayList;
 
 
 @Entity
@@ -28,6 +30,16 @@ public class Reservation implements Serializable {
     private String checkInName;
     @Column(name = "code", nullable = false)
     private String code;
+    @Column(name = "email", nullable = false)
+    private String email;
+
+    @OneToMany(
+        mappedBy = "reservation",
+        cascade = CascadeType.ALL,
+        orphanRemoval = true
+    )
+    private List<Member> members = new ArrayList<>();
+ 
 
     @ManyToMany(cascade = {CascadeType.ALL})
     @JsonIgnore
@@ -43,7 +55,8 @@ public class Reservation implements Serializable {
                         Double  finalPrice,
                         String documentNumber,
                         String checkInName,
-                        String code){
+                        String code,
+                        String email){
         this.id = id;
         this.start = start;
         this.end = end;
@@ -51,6 +64,7 @@ public class Reservation implements Serializable {
         this.documentNumber = documentNumber;
         this.checkInName = checkInName;
         this.code = code;
+        this.email= email;
     }
 
     public Reservation(){
@@ -103,6 +117,18 @@ public class Reservation implements Serializable {
     }
     public void setRooms(Set<Room> rooms){
         this.rooms = rooms;
+    }
+    public List<Member> getMembers(){
+        return this.members;
+    }
+    public void setMembers(List<Member> members){
+        this.members = members;
+    }
+    public String getEmail(){
+        return this.email;
+    }
+    public void setEmail(String email){
+        this.email = email;
     }
 }
 

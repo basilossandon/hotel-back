@@ -24,6 +24,11 @@ public class ReservationController implements DaoReservation {
     @Autowired
     private RoomRepository roomRepository;
 
+   private boolean isValid(String email) {
+      String regex = "^[\\w-_\\.+]*[\\w-_\\.]\\@([\\w]+\\.)+[\\w]+[\\w]$";
+      return email.matches(regex);
+   }
+
     @GetMapping(value = "")
     public @ResponseBody Iterable<Reservation> getAll(){
         return reservationRepository.findAll();
@@ -45,13 +50,19 @@ public class ReservationController implements DaoReservation {
         createdReservation.setDocumentNumber(reservation.getDocumentNumber());
         createdReservation.setCheckInName(reservation.getCheckInName());
         createdReservation.setCode(reservation.getCode());
+        createdReservation.setEmail(reservation.getEmail());
 
         if (createdReservation.getStart() != null &&
             createdReservation.getEnd() != null &&
             createdReservation.getFinalPrice() != null &&
             createdReservation.getDocumentNumber() != null &&
             createdReservation.getCheckInName() != null &&
-            createdReservation.getCode() != null ){
+            createdReservation.getCode() != null && 
+            createdReservation.getEmail() != null){
+
+            if (! this.isValid(createdReservation.getEmail()) ){
+                return new ResponseEntity<>("El correo ingresado no es válido.", HttpStatus.BAD_REQUEST);
+            }
 
             if (createdReservation.getStart().isAfter(createdReservation.getEnd()))
                 return new ResponseEntity<>("La fecha de inicio no puede ser posterior a la fecha de termino.", HttpStatus.BAD_REQUEST);
@@ -80,15 +91,22 @@ public class ReservationController implements DaoReservation {
         reservationToUpdate.setDocumentNumber(reservation.getDocumentNumber());
         reservationToUpdate.setCheckInName(reservation.getCheckInName());
         reservationToUpdate.setCode(reservation.getCode());
+        reservationToUpdate.setEmail(reservation.getEmail());
 
         if (reservationToUpdate.getStart() != null &&
             reservationToUpdate.getEnd() != null &&
             reservationToUpdate.getFinalPrice() != null &&
             reservationToUpdate.getDocumentNumber() != null &&
             reservationToUpdate.getCheckInName() != null &&
-            reservationToUpdate.getCode() != null ){
+            reservationToUpdate.getCode() != null &&
+            reservationToUpdate.getEmail() != null){
+
+                if (! this.isValid(reservationToUpdate.getEmail()) )
+                    return new ResponseEntity<>("El correo ingresado no es válido.", HttpStatus.BAD_REQUEST);
+
                 if (reservationToUpdate.getStart().isAfter(reservationToUpdate.getEnd()))
                     return new ResponseEntity<>("La fecha de inicio no puede ser posterior a la fecha de termino.", HttpStatus.BAD_REQUEST);
+                
                 if (reservationToUpdate.getFinalPrice() < 0)
                     return new ResponseEntity<>("El precio final asociado a la reserva no puede ser menor a 0", HttpStatus.BAD_REQUEST);
 
