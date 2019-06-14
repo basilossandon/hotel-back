@@ -51,9 +51,8 @@ public class ReservationController implements DaoReservation {
 
         Room requestedRoom = roomRepository.findRoomById(reservation.getRoomId());
 
-        System.out.println(requestedRoom.getId());
-        System.out.println(requestedRoom.getPrice());
-
+        if (requestedRoom == null)
+            return new ResponseEntity<>("La habitación ingresada no existe.", HttpStatus.BAD_REQUEST);
 
         createdReservation.setStart(reservation.getStart());
         createdReservation.setEnd(reservation.getEnd());

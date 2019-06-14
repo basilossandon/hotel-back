@@ -43,11 +43,15 @@ public class RoomController implements DaoRoom {
     ResponseEntity createRoom(@RequestBody RoomDTO room){
         Room createdRoom = new Room();
         createdRoom.setPrice(room.getPrice());
-        createdRoom.setRoomTypeId(room.getRoomTypeId());
+        createdRoom.setCapacity(room.getCapacity());
+        createdRoom.setType(room.getType());
 
-        if (createdRoom.getPrice() != null && createdRoom.getRoomTypeId() != null){
+        if (createdRoom.getPrice() != null && createdRoom.getType() != null && createdRoom.getCapacity() != null){
             if (createdRoom.getPrice() < 0)
                 return new ResponseEntity<>("El valor de la habitación es menor a 0.", HttpStatus.BAD_REQUEST);
+
+            if (createdRoom.getCapacity() <= 0)
+                return new ResponseEntity<>("La capacidad de la habitación es igual o menor a 0.", HttpStatus.BAD_REQUEST);
 
             return new ResponseEntity<>(roomRepository.save(createdRoom),HttpStatus.CREATED);
         }
@@ -63,11 +67,15 @@ public class RoomController implements DaoRoom {
             return new ResponseEntity<>("La habitación a editar no se ha podido encontrar.", HttpStatus.BAD_REQUEST);
 
         roomToUpdate.setPrice(room.getPrice());
-        roomToUpdate.setRoomTypeId(room.getRoomTypeId());
+        roomToUpdate.setCapacity(room.getCapacity());
+        roomToUpdate.setType(room.getType());
 
-        if (roomToUpdate.getPrice() != null && roomToUpdate.getRoomTypeId() != null){
+        if (roomToUpdate.getPrice() != null && roomToUpdate.getType() != null && roomToUpdate.getCapacity() != null){
             if (roomToUpdate.getPrice() < 0)
                 return new ResponseEntity<>("El valor de la habitación es menor a 0.", HttpStatus.BAD_REQUEST);
+
+            if (roomToUpdate.getCapacity() <= 0)
+                return new ResponseEntity<>("La capacidad de la habitación es igual o menor a 0.", HttpStatus.BAD_REQUEST);
 
             return new ResponseEntity<>(roomRepository.save(roomToUpdate),HttpStatus.CREATED);
         }

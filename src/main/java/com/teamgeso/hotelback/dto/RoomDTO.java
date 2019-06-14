@@ -1,22 +1,30 @@
 package com.teamgeso.hotelback.dto;
 public class RoomDTO {
     private Double price;
-    private Integer roomTypeId;
+    private Integer capacity;
+    private String type;
 
     public Double getPrice() {
-        return price;
+        return this.price;
     }
 
     public void setPrice(Double price) {
         this.price = price;
     }
 
-    public Integer getRoomTypeId() {
-        return roomTypeId;
+    public Integer getCapacity() {
+        return this.capacity;
+    }
+    
+    public void setCapacity(Integer capacity) {
+        this.capacity = capacity;
     }
 
-    public void setRoomTypeId(Integer roomTypeId) {
-        this.roomTypeId = roomTypeId;
+    public String getType() {
+        return this.type;
     }
 
+    public void setType(String type) {
+        this.type = type;
+    }
 }

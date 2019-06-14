@@ -16,19 +16,21 @@ public class Room implements Serializable {
     private Integer id;
     @Column(name = "price", nullable = false)
     private Double price;
-    @Column(name = "room_type_id", nullable = false)
-    private Integer roomTypeId;
+    @Column(name = "capacity", nullable = false)
+    private Integer capacity;
+    @Column(name = "type", nullable = false)
+    private String type;
 
     @ManyToMany(mappedBy = "rooms")
     @JsonIgnore
     private Set<Service> services = new HashSet<>();
 
     public Room(Integer id,
-                Double  price,
-                Integer  roomTypeId){
+                Integer capacity,
+                String type){
         this.id = id;
-        this.price = price;
-        this.roomTypeId = roomTypeId;
+        this.capacity = capacity;
+        this.type = type;
     }
 
     public Room(){
@@ -48,13 +50,21 @@ public class Room implements Serializable {
     public void setPrice(Double price) {
         this.price = price;
     }
-
-    public Integer getRoomTypeId() {
-        return this.roomTypeId;
+    
+    public Integer getCapacity() {
+        return this.capacity;
+    }
+    
+    public void setCapacity(Integer capacity) {
+        this.capacity = capacity;
     }
 
-    public void setRoomTypeId(Integer roomTypeId) {
-        this.roomTypeId = roomTypeId;
+    public String getType() {
+        return this.type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
     }
 
     public Set<Service> getServices(){
