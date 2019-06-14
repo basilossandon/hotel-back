@@ -12,7 +12,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 public class Service implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "service_id", nullable = false)
+    @Column(name = "id", nullable = false)
     private Integer id;
     @Column(name = "price", nullable = false)
     private Double price;

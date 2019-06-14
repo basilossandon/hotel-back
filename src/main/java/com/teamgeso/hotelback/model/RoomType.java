@@ -8,7 +8,7 @@ import java.io.Serializable;
 public class RoomType implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name="room_type_id", nullable = false)
+    @Column(name="id", nullable = false)
     private Integer id;
     @Column(name = "name", nullable = false)
     private String name;

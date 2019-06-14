@@ -48,7 +48,11 @@ public class ReservationController implements DaoReservation {
     ResponseEntity createReservation(@RequestBody ReservationDTO reservation){
         List<Reservation> allReservation = reservationRepository.findAll();
         Reservation createdReservation = new Reservation();
+
         Room requestedRoom = roomRepository.findRoomById(reservation.getRoomId());
+
+        System.out.println(requestedRoom.getId());
+        System.out.println(requestedRoom.getPrice());
 
 
         createdReservation.setStart(reservation.getStart());
