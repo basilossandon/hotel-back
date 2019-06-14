@@ -5,10 +5,8 @@ import static org.junit.Assert.*;
 
 import com.teamgeso.hotelback.model.Reservation;
 import com.teamgeso.hotelback.model.Room;
-import com.teamgeso.hotelback.model.RoomType;
 import com.teamgeso.hotelback.dto.ReservationDTO;
 import com.teamgeso.hotelback.dto.RoomDTO;
-import com.teamgeso.hotelback.dto.RoomTypeDTO;
 
 import java.time.LocalDateTime;
 
