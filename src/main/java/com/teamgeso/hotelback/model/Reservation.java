@@ -22,8 +22,6 @@ public class Reservation implements Serializable {
     private LocalDateTime start;
     @Column(name = "end", nullable = false)
     private LocalDateTime end;
-    @Column(name = "final_price", nullable = false)
-    private Double finalPrice;
     @Column(name = "document_number", nullable = false)
     private String documentNumber;
     @Column(name = "checkin_name", nullable = false)
@@ -32,6 +30,8 @@ public class Reservation implements Serializable {
     private String code;
     @Column(name = "email", nullable = false)
     private String email;
+    @Column(name = "room_id", nullable = false)    
+    private Integer roomId;
 
     @OneToMany(
         mappedBy = "reservation",
@@ -39,20 +39,11 @@ public class Reservation implements Serializable {
         orphanRemoval = true
     )
     private List<Member> members = new ArrayList<>();
- 
-
-    @ManyToMany(cascade = {CascadeType.ALL})
-    @JsonIgnore
-    @JoinTable(name="reservation_room",
-            joinColumns={@JoinColumn(name="reservation_id")},
-            inverseJoinColumns={@JoinColumn(name="room_id")})
-    private Set<Room> rooms =new HashSet<Room>();
-
+    
 
     public Reservation( Integer id,
                         LocalDateTime start,
                         LocalDateTime end,
-                        Double  finalPrice,
                         String documentNumber,
                         String checkInName,
                         String code,
@@ -60,7 +51,6 @@ public class Reservation implements Serializable {
         this.id = id;
         this.start = start;
         this.end = end;
-        this.finalPrice= finalPrice;
         this.documentNumber = documentNumber;
         this.checkInName = checkInName;
         this.code = code;
@@ -88,12 +78,6 @@ public class Reservation implements Serializable {
     public void setEnd(LocalDateTime end) {
         this.end = end;
     }
-    public Double getFinalPrice() {
-        return this.finalPrice;
-    }
-    public void setFinalPrice(Double finalPrice){
-        this.finalPrice = finalPrice;
-    }
     public String getDocumentNumber(){
         return this.documentNumber;
     }
@@ -112,11 +96,11 @@ public class Reservation implements Serializable {
     public void setCode(String code){
         this.code = code;
     }
-    public Set<Room> getRooms(){
-        return this.rooms;
+    public String getEmail(){
+        return this.email;
     }
-    public void setRooms(Set<Room> rooms){
-        this.rooms = rooms;
+    public void setEmail(String email){
+        this.email = email;
     }
     public List<Member> getMembers(){
         return this.members;
@@ -124,11 +108,11 @@ public class Reservation implements Serializable {
     public void setMembers(List<Member> members){
         this.members = members;
     }
-    public String getEmail(){
-        return this.email;
+    public Integer getRoomId(){
+        return this.roomId;
     }
-    public void setEmail(String email){
-        this.email = email;
+    public void setRoomId(Integer roomId){
+        this.roomId = roomId;
     }
 }
 

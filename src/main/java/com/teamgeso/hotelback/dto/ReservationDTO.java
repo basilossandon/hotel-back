@@ -10,6 +10,7 @@ public class ReservationDTO {
     private String checkInName;
     private String code;
     private String email;
+    private Integer roomId;
 
     public LocalDateTime getStart() {
         return this.start;
@@ -65,5 +66,13 @@ public class ReservationDTO {
 
     public void setEmail(String email){
         this.email = email;
+    }
+
+    public Integer getRoomId(){
+        return this.roomId;
+    }
+
+    public void setRoomId(Integer roomId){
+        this.roomId = roomId;
     }
 }

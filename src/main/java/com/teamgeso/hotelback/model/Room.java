@@ -12,16 +12,12 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 public class Room implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "room_id", nullable = false)
+    @Column(name = "id", nullable = false)
     private Integer id;
     @Column(name = "price", nullable = false)
     private Double price;
     @Column(name = "room_type_id", nullable = false)
     private Integer roomTypeId;
-
-    @ManyToMany(mappedBy = "rooms")
-    @JsonIgnore
-    private Set<Reservation> reservations = new HashSet<>();
 
     @ManyToMany(mappedBy = "rooms")
     @JsonIgnore
@@ -61,14 +57,6 @@ public class Room implements Serializable {
         this.roomTypeId = roomTypeId;
     }
 
-    public Set<Reservation> getReservations(){
-        return this.reservations;
-    }
-
-    public void setReservations(Set<Reservation> reservations){
-        this.reservations = reservations;
-    }
-
     public Set<Service> getServices(){
         return this.services;
     }
@@ -76,5 +64,4 @@ public class Room implements Serializable {
     public void setServices(Set<Service> services){
         this.services = services;
     }
-
 }

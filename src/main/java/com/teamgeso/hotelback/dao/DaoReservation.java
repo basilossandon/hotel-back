@@ -17,5 +17,5 @@ public interface DaoReservation {
     ResponseEntity createReservation(ReservationDTO reservation);
     ResponseEntity updateReservation(Integer id, ReservationDTO reservation);
     ResponseEntity deleteReservation(Integer id);
-    ResponseEntity linkRoomToReservation(Integer id, Integer idRoom);
+    // ResponseEntity linkRoomToReservation(Integer id, Integer idRoom);
 }
