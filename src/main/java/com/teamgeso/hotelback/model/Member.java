@@ -18,20 +18,18 @@ public class Member implements Serializable {
     private Integer id;
     @Column(name = "name", nullable = false)
     private String name;
-
-    // private String documentNumber
-    // @Column(name = "bill_id", nullable = false)
-    // private Integer billId;
+    @Column(name = "document_number", nullable = false)
+    private String documentNumber;
 
     @JsonIgnore
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "reservation_id")
     private Reservation reservation;
 
-    public Member(Integer id, String name, /*Integer billId,*/ Reservation reservation){
+    public Member(Integer id, String name, String documentNumber, Reservation reservation){
         this.id = id;
         this.name = name;
-        // this.billId = billId;
+        this.documentNumber = documentNumber;
         this.reservation = reservation;
     }
 
@@ -52,6 +50,14 @@ public class Member implements Serializable {
 
     public void setName(String name){
         this.name = name;
+    }
+
+    public String getDocumentNumber(){
+        return this.documentNumber;
+    }
+
+    public void setDocumentNumber(String documentNumber){
+        this.documentNumber = documentNumber;
     }
 
     // public Integer getBillId(){

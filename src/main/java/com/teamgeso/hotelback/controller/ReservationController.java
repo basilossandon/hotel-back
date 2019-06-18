@@ -2,9 +2,11 @@ package com.teamgeso.hotelback.controller;
 
 import com.teamgeso.hotelback.dao.DaoReservation;
 import com.teamgeso.hotelback.model.Reservation;
+import com.teamgeso.hotelback.model.Bill;
 import com.teamgeso.hotelback.model.Room;
 import com.teamgeso.hotelback.dto.ReservationDTO;
 import com.teamgeso.hotelback.repository.ReservationRepository;
+import com.teamgeso.hotelback.repository.BillRepository;
 import com.teamgeso.hotelback.repository.RoomRepository;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,6 +29,8 @@ public class ReservationController implements DaoReservation {
     private ReservationRepository reservationRepository;
     @Autowired
     private RoomRepository roomRepository;
+    @Autowired
+    private BillRepository billRepository;
 
    private boolean isValid(String email) {
       return email.matches("^[\\w-_\\.+]*[\\w-_\\.]\\@([\\w]+\\.)+[\\w]+[\\w]$");
@@ -92,8 +96,7 @@ public class ReservationController implements DaoReservation {
                 return new ResponseEntity<>("La fecha de inicio no puede ser posterior a la fecha de termino.", HttpStatus.BAD_REQUEST);
 
             return new ResponseEntity<>(reservationRepository.save(createdReservation),HttpStatus.CREATED);
-        }
-            
+        }   
 
         return new ResponseEntity<>("La reserva a crear no puede contener valores nulos.", HttpStatus.BAD_REQUEST);
 
@@ -165,34 +168,15 @@ public class ReservationController implements DaoReservation {
 
     }
 
-    // @PostMapping("/{id}/rooms/{idRoom}")
-    // @ResponseBody
-    // public ResponseEntity linkRoomToReservation (@PathVariable("id") Integer id, @PathVariable("idRoom") Integer idRoom) {
+    @PostMapping(value = "/code/{code}")
+    public @ResponseBody
+    ResponseEntity findByCode(@PathVariable String code){
+        List<Reservation> reservations = reservationRepository.findByCode(code);
 
-    //     Reservation reservation = reservationRepository.findReservationById(id);
-    //     Room room = roomRepository.findRoomById(idRoom);
+        if (reservations.isEmpty())
+            return new ResponseEntity<>("No se han encontrado reservas con ese código", HttpStatus.BAD_REQUEST);
 
-    //     if (reservation != null && room != null) {
-    //         for (Reservation roomReservation : room.getReservations()){
-    //             if (reservation.getEnd().isAfter(roomReservation.getStart()) && reservation.getEnd().isBefore(roomReservation.getEnd()))
-    //                 return new ResponseEntity<>("El fin de la reserva se encuentra entre una reserva ya solicitada.", HttpStatus.BAD_REQUEST);
-
-    //             // I think that this else if is not necessary, but im not totally sure yet, so I will comment it.
-    //             // else if (reservation.getStart().isAfter(roomReservation.getStart()) && reservation.getEnd().isBefore(roomReservation.getEnd()))
-    //                 // return new ResponseEntity<>("La reserva se encuentra entre una reserva ya solicitada.", HttpStatus.BAD_REQUEST);
-
-    //             else if (reservation.getStart().isAfter(roomReservation.getStart()) && reservation.getStart().isBefore(roomReservation.getEnd()))
-    //                 return new ResponseEntity<>("El inicio de la reserva se encuentra entre una reserva ya solicitada.", HttpStatus.BAD_REQUEST);
-    //         }
-
-    //         reservation.getRooms().add(room);
-    //         room.getReservations().add(reservation);
-    //         roomRepository.save(room);
-
-    //         return new ResponseEntity<>("La reserva se ha asignado correctamente a la habitación", HttpStatus.OK);
-    //     }
-
-    //     return new ResponseEntity<>("La habitación y/o la reserva no se han encontrado.", HttpStatus.NOT_ACCEPTABLE);
-    // }
+        return new ResponseEntity<>(reservations, HttpStatus.OK);
+    }
 
 }

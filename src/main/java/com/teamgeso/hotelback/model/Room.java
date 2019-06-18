@@ -21,10 +21,6 @@ public class Room implements Serializable {
     @Column(name = "type", nullable = false)
     private String type;
 
-    @ManyToMany(mappedBy = "rooms")
-    @JsonIgnore
-    private Set<Service> services = new HashSet<>();
-
     public Room(Integer id,
                 Integer capacity,
                 String type){
@@ -65,13 +61,5 @@ public class Room implements Serializable {
 
     public void setType(String type) {
         this.type = type;
-    }
-
-    public Set<Service> getServices(){
-        return this.services;
-    }
-
-    public void setServices(Set<Service> services){
-        this.services = services;
     }
 }

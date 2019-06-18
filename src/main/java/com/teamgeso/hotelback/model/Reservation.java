@@ -32,6 +32,8 @@ public class Reservation implements Serializable {
     private String email;
     @Column(name = "room_id", nullable = false)    
     private Integer roomId;
+    @Column(name = "bill_id", nullable = true)
+    private Integer billId;
 
     @OneToMany(
         mappedBy = "reservation",
@@ -102,17 +104,23 @@ public class Reservation implements Serializable {
     public void setEmail(String email){
         this.email = email;
     }
-    public List<Member> getMembers(){
-        return this.members;
-    }
-    public void setMembers(List<Member> members){
-        this.members = members;
-    }
     public Integer getRoomId(){
         return this.roomId;
     }
     public void setRoomId(Integer roomId){
         this.roomId = roomId;
+    }
+    public Integer getBillId(){
+        return this.billId;
+    }
+    public void setBillId(Integer billId){
+        this.billId = billId;
+    }
+    public List<Member> getMembers(){
+        return this.members;
+    }
+    public void setMembers(List<Member> members){
+        this.members = members;
     }
 }
 

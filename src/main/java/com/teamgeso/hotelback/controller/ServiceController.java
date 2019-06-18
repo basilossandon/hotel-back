@@ -83,4 +83,36 @@ public class ServiceController implements DaoService {
 
         return new ResponseEntity<>("La habitación a borrar no existe.", HttpStatus.BAD_REQUEST);
     }
+
+
+    //THIS SHOULD GO ON BILL CONTROLLER
+    // @PostMapping("/{id}/rooms/{idRoom}")
+    // @ResponseBody
+    // public ResponseEntity linkBillToReservation (@PathVariable("id") Integer id, @PathVariable("idBill") Integer idRoom) {
+
+    //     Reservation reservation = reservationRepository.findReservationById(id);
+    //     Room room = roomRepository.findRoomById(idRoom);
+
+    //     if (reservation != null && room != null) {
+    //         for (Reservation roomReservation : room.getReservations()){
+    //             if (reservation.getEnd().isAfter(roomReservation.getStart()) && reservation.getEnd().isBefore(roomReservation.getEnd()))
+    //                 return new ResponseEntity<>("El fin de la reserva se encuentra entre una reserva ya solicitada.", HttpStatus.BAD_REQUEST);
+
+    //             // I think that this else if is not necessary, but im not totally sure yet, so I will comment it.
+    //             // else if (reservation.getStart().isAfter(roomReservation.getStart()) && reservation.getEnd().isBefore(roomReservation.getEnd()))
+    //                 // return new ResponseEntity<>("La reserva se encuentra entre una reserva ya solicitada.", HttpStatus.BAD_REQUEST);
+
+    //             else if (reservation.getStart().isAfter(roomReservation.getStart()) && reservation.getStart().isBefore(roomReservation.getEnd()))
+    //                 return new ResponseEntity<>("El inicio de la reserva se encuentra entre una reserva ya solicitada.", HttpStatus.BAD_REQUEST);
+    //         }
+
+    //         reservation.getRooms().add(room);
+    //         room.getReservations().add(reservation);
+    //         roomRepository.save(room);
+
+    //         return new ResponseEntity<>("La reserva se ha asignado correctamente a la habitación", HttpStatus.OK);
+    //     }
+
+    //     return new ResponseEntity<>("La habitación y/o la reserva no se han encontrado.", HttpStatus.NOT_ACCEPTABLE);
+    // }
 }

@@ -83,9 +83,9 @@ public class MemberController implements DaoMember {
         return new ResponseEntity<>("La habitación a borrar no existe.", HttpStatus.BAD_REQUEST);
     }
 
-    @PostMapping("/{id}/reservation/{idReservation}")
+    @PostMapping("/{documentNumber}/service/{idService}")
     @ResponseBody
-    public ResponseEntity linkMemberToReservation (@PathVariable("id") Integer id, @PathVariable("idReservation") Integer idReservation) {
+    public ResponseEntity requestServiceToRoom (@PathVariable("") Integer id, @PathVariable("idReservation") Integer idReservation) {
 
         Reservation reservation = reservationRepository.findReservationById(idReservation);
         Member member = memberRepository.findMemberById(id);

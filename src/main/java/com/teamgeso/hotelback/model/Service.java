@@ -21,10 +21,10 @@ public class Service implements Serializable {
 
     @ManyToMany(cascade = {CascadeType.ALL})
     @JsonIgnore
-    @JoinTable(name="room_service",
-            joinColumns={@JoinColumn(name="room_id")},
-            inverseJoinColumns={@JoinColumn(name="service_id")})
-    private Set<Room> rooms =new HashSet<>();
+    @JoinTable(name="bill_service",
+            joinColumns={@JoinColumn(name="service_id")},
+            inverseJoinColumns={@JoinColumn(name="bill_id")})
+    private Set<Bill> bills =new HashSet<>();
 
     public Service(Integer id,
                 Double  price,
@@ -60,11 +60,11 @@ public class Service implements Serializable {
         this.name = name;
     }
 
-    public Set<Room> getRooms(){
-        return this.rooms;
+    public Set<Bill> getBills(){
+        return this.bills;
     }
     
-    public void setRooms(Set<Room> rooms){
-        this.rooms = rooms;
+    public void setBills(Set<Bill> bills){
+        this.bills = bills;
     }
 }
