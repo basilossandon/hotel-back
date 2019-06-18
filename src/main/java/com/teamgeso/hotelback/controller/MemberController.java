@@ -3,9 +3,11 @@ package com.teamgeso.hotelback.controller;
 import com.teamgeso.hotelback.dao.DaoMember;
 import com.teamgeso.hotelback.dto.MemberDTO;
 import com.teamgeso.hotelback.model.Member;
+import com.teamgeso.hotelback.model.Bill;
 import com.teamgeso.hotelback.model.Reservation;
 import com.teamgeso.hotelback.repository.MemberRepository;
 import com.teamgeso.hotelback.repository.ReservationRepository;
+import com.teamgeso.hotelback.repository.BillRepository;
 
 //HASTA AQUÍ ESTÁ LISTO
 
@@ -27,6 +29,8 @@ public class MemberController implements DaoMember {
     private MemberRepository memberRepository;
     @Autowired
     private ReservationRepository reservationRepository;
+    @Autowired
+    private BillRepository billRepository;
 
     @GetMapping("")
     @ResponseBody
@@ -46,9 +50,36 @@ public class MemberController implements DaoMember {
         Member createdMember = new Member();
 
         createdMember.setName(member.getName());
+        createdMember.setDocumentNumber(member.getDocumentNumber());
+        createdMember.setAge(member.getAge());
+        createdMember.setCountry(member.getCountry());
+        
 
-        if (createdMember.getName() != null)
-            return new ResponseEntity<>(memberRepository.save(createdMember),HttpStatus.CREATED);
+        if (createdMember.getName() != null &&
+            createdMember.getDocumentNumber() != null &&
+            createdMember.getAge() != null &&
+            createdMember.getCountry() != null &&
+            member.getReservationId() != null){
+
+            Reservation reservation = reservationRepository.findReservationById(member.getReservationId());
+
+            if (reservation == null)
+                return new ResponseEntity<>("El miembro a crear se está asignando a una reserva no encontrada.",HttpStatus.BAD_REQUEST);
+
+            if (createdMember.getAge() < 0)
+                return new ResponseEntity<>("La edad ingresada no es válida.",HttpStatus.BAD_REQUEST);
+
+            Bill bill = new Bill();
+            bill.setRoomId(reservation.getRoomId());
+            billRepository.save(bill);
+
+            createdMember.setReservation(reservation);
+
+            reservation.setBillId(bill.getId());
+            reservation.getMembers().add(createdMember);
+            reservationRepository.save(reservation);
+            return new ResponseEntity<>("El miembro se ha añadido correctamente.",HttpStatus.CREATED);
+        }
         
         return new ResponseEntity<>("El miembro a crear no puede contener valores nulos.", HttpStatus.BAD_REQUEST);
     }

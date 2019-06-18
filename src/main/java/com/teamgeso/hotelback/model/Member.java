@@ -20,16 +20,27 @@ public class Member implements Serializable {
     private String name;
     @Column(name = "document_number", nullable = false)
     private String documentNumber;
+    @Column(name = "age", nullable = false)
+    private Integer age;
+    @Column(name = "country", nullable = false)
+    private String country;
 
     @JsonIgnore
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "reservation_id")
     private Reservation reservation;
 
-    public Member(Integer id, String name, String documentNumber, Reservation reservation){
+    public Member(Integer id, 
+                  String name, 
+                  String documentNumber, 
+                  Integer age, 
+                  String country, 
+                  Reservation reservation){
         this.id = id;
         this.name = name;
         this.documentNumber = documentNumber;
+        this.age = age;
+        this.country = country;
         this.reservation = reservation;
     }
 
@@ -60,13 +71,21 @@ public class Member implements Serializable {
         this.documentNumber = documentNumber;
     }
 
-    // public Integer getBillId(){
-    //     return this.billId;
-    // }
+    public Integer getAge(){
+        return this.age;
+    }
 
-    // public void setBillId(Integer billId){
-    //     this.billId = billId;
-    // }
+    public void setAge(Integer age){
+        this.age = age;
+    }
+
+    public String getCountry(){
+        return this.country;
+    }
+
+    public void setCountry(String country){
+        this.country = country;
+    }
 
     public Reservation getReservation(){
         return this.reservation;
@@ -76,5 +95,11 @@ public class Member implements Serializable {
         this.reservation = reservation;
     }
 
+    // public Integer getBillId(){
+    //     return this.billId;
+    // }
 
+    // public void setBillId(Integer billId){
+    //     this.billId = billId;
+    // }
 }
