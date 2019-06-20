@@ -5,9 +5,13 @@ import static org.junit.Assert.*;
 
 import com.teamgeso.hotelback.model.Reservation;
 import com.teamgeso.hotelback.model.Room;
+import com.teamgeso.hotelback.model.Service;
+import com.teamgeso.hotelback.model.Bill;
 import com.teamgeso.hotelback.dto.ReservationDTO;
 import com.teamgeso.hotelback.dto.RoomDTO;
 
+import java.util.HashSet;
+import java.util.Set;
 import java.time.LocalDateTime;
 
 public class HotelbackApplicationTest {
@@ -68,69 +72,50 @@ public class HotelbackApplicationTest {
          assertEquals(email,reservation.getEmail());
      }
     
-    // @Test    
-    // public void roomModelTest(){
-    //     Integer id = 1;
-    //     Integer capacity = 2;
-    //     Double price = 10000.0;
-    //     Integer roomTypeId = 2;
+     @Test    
+     public void roomModelTest(){
+         Integer id = 1;
+         Integer capacity = 2;
+         
+         String type = "Doble";
 
-    //     Room room = new Room(id, capacity, price, roomTypeId);
+         Room room = new Room(id, capacity,type);
 
-    //     assertEquals(room.getId(), id);
-    //     assertEquals(room.getCapacity(), capacity);
-    //     assertEquals(room.getPrice(), price, 0.001);
-    //     assertEquals(room.getRoomTypeId(), roomTypeId);
-    // }
+         assertEquals(room.getId(), id);
+         assertEquals(room.getCapacity(), capacity);
+         
+         assertEquals(room.getType(), type);
+     }
     
-    // @Test
-    // public void roomModelTest2(){
-    //     Integer id = 1;
-    //     Integer capacity = 2;
-    //     Double price = 10000.0;
-    //     Integer roomTypeId = 2;
+     @Test
+     public void roomModelTest2(){
+         Integer id = 2;
+         Integer capacity = 2;
+         Double price = 10000.0;
+         String roomTypeId = "Matrimonial";
 
-    //     Room room = new Room();
-    //     room.setId(id);
-    //     room.setCapacity(capacity);
-    //     room.setPrice(price);
-    //     room.setRoomTypeId(roomTypeId);
+         Room room = new Room();
+         room.setId(id);
+         room.setCapacity(capacity);
+         room.setPrice(price);
+         room.setType(roomTypeId);
 
-    //     assertEquals(room.getId(), id);
-    //     assertEquals(room.getCapacity(), capacity);
-    //     assertEquals(room.getPrice(), price, 0.001);
-    //     assertEquals(room.getRoomTypeId(), roomTypeId);
-    // }
-
-    // @Test    
-    // public void roomTypeModelTest(){
-    //     Integer id = 1;
-    //     String name = "Matrimonial";
-    //     Double price = 100000.0;
-
-    //     RoomType room = new RoomType(id, price, name);
-
-    //     assertEquals(room.getId(), id);
-    //     assertEquals(room.getName(), name);
-    //     assertEquals(room.getPrice(), price, 0.001);
-    // }
-
-    // @Test    
-    // public void roomTypeModelTest2(){
-    //     Integer id = 1;
-    //     String name = "Matrimonial";
-    //     Double price = 100000.0;
-
-    //     RoomType room = new RoomType();
-
-    //     room.setId(id);
-    //     room.setName(name);
-    //     room.setPrice(price);
-
-    //     assertEquals(room.getId(), id);
-    //     assertEquals(room.getName(), name);
-    //     assertEquals(room.getPrice(), price, 0.001);
-    // }
+         assertEquals(room.getId(), id);
+         assertEquals(room.getCapacity(), capacity);
+         assertEquals(room.getPrice(), price, 0.001);
+         assertEquals(room.getType(), roomTypeId);
+     }
+     @Test 
+     public void billModelTest(){
+         Integer id =1;
+         Integer roomId= 1;
+         Set<Service> services = new HashSet<>();
+        Bill bill= new Bill(id,roomId,services);
+        assertEquals(id, bill.getId());
+        assertEquals(roomId, bill.getRoomId());
+        assertEquals(services, bill.getServices());
+     }
+   
 
     // @Test
     // public void reservationDTOModelTest(){
