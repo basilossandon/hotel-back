@@ -12,58 +12,61 @@ import java.time.LocalDateTime;
 
 public class HotelbackApplicationTest {
 
-    // @Test
-    // public void reservationModelTest(){
-    // 	Integer id = 1;
-    // 	Integer room_id = 2;
-    // 	Double price = 10000.0;
-    // 	String documentNumber = "1453241";
-    // 	String checkInName = "Gabriel";
-    // 	String code = "AX3400";
-    // 	LocalDateTime now = LocalDateTime.now();
-    // 	LocalDateTime tomorrow = now.plusDays(1);
-    // 	Reservation reservation = new Reservation(id, now, tomorrow, price, documentNumber, checkInName, code, room_id);
+     @Test
+     public void reservationModelTest(){
+     	Integer id = 1;
+     	
+     	
+     	String documentNumber = "1453241";
+     	String checkInName = "Gabriel";
+     	String code = "AX3400";
+        String email = "gabriel@usach.cl";
+     	LocalDateTime now = LocalDateTime.now();
+     	LocalDateTime tomorrow = now.plusDays(1);
+     	Reservation reservation = new Reservation(id, now, tomorrow, documentNumber, checkInName, code, email);
 
-    // 	assertEquals(reservation.getId(), id);
-    // 	assertEquals(reservation.getStart(), now);
-    // 	assertEquals(reservation.getEnd(), tomorrow);
-    // 	assertEquals(reservation.getFinalPrice(), price, 0.001);
-    // 	assertEquals(documentNumber, reservation.getDocumentNumber());
-    // 	assertEquals(checkInName, reservation.getCheckinName());
-    // 	assertEquals(code, reservation.getCode());
-    // 	assertEquals(reservation.getRoomId(), room_id);
-    // }
+     	assertEquals(reservation.getId(), id);
+     	assertEquals(reservation.getStart(), now);
+     	assertEquals(reservation.getEnd(), tomorrow);
+     	
+     	assertEquals(documentNumber, reservation.getDocumentNumber());
+     	assertEquals(checkInName, reservation.getCheckInName());
+        assertEquals(code, reservation.getCode());
+        assertEquals(email,reservation.getEmail());
+     	
+     }
 
-    // @Test
-    // public void reservationModelTest2(){
-    //     Integer id = 1;
-    //     LocalDateTime now = LocalDateTime.now();
-    //     LocalDateTime tomorrow = now.plusDays(1);
-    //     Double price = 10000.0;
-    //     String documentNumber = "1453241";
-    //     String checkInName = "Gabriel";
-    //     String code = "AX3400";
-    //     Integer room_id = 2;
-    //     Reservation reservation = new Reservation();
+     @Test
+    public void reservationModelTest2(){
+         Integer id = 2;
+         LocalDateTime now = LocalDateTime.now();
+         LocalDateTime tomorrow = now.plusDays(1);
+         
+         String documentNumber = "1453241";
+         String checkInName = "Gabriel";
+         String code = "AX3400";
+         String email="gabriel@usahc.cl";
+         Reservation reservation = new Reservation();
 
-    //     reservation.setId(id);
-    //     reservation.setStart(now);
-    //     reservation.setEnd(tomorrow);
-    //     reservation.setFinalPrice(price);
-    //     reservation.setDocumentNumber(documentNumber);
-    //     reservation.setCheckInName(checkInName);
-    //     reservation.setCode(code);
-    //     reservation.setRoomId(room_id);
+         reservation.setId(id);
+         reservation.setStart(now);
+         reservation.setEnd(tomorrow);
+         
+         reservation.setDocumentNumber(documentNumber);
+         reservation.setCheckInName(checkInName);
+         reservation.setCode(code);
+         reservation.setEmail(email);
+         //setEmail
 
-    //     assertEquals(reservation.getId(), id);
-    //     assertEquals(reservation.getStart(), now);
-    //     assertEquals(reservation.getEnd(), tomorrow);
-    //     assertEquals(reservation.getFinalPrice(), price, 0.001);
-    //     assertEquals(documentNumber, reservation.getDocumentNumber());
-    //     assertEquals(checkInName, reservation.getCheckinName());
-    //     assertEquals(code, reservation.getCode());
-    //     assertEquals(reservation.getRoomId(), room_id);
-    // }
+         assertEquals(reservation.getId(), id);
+         assertEquals(reservation.getStart(), now);
+         assertEquals(reservation.getEnd(), tomorrow);
+         
+         assertEquals(documentNumber, reservation.getDocumentNumber());
+         assertEquals(checkInName, reservation.getCheckInName());
+         assertEquals(code, reservation.getCode());
+         assertEquals(email,reservation.getEmail());
+     }
     
     // @Test    
     // public void roomModelTest(){
