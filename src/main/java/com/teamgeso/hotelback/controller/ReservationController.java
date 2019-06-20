@@ -2,10 +2,12 @@ package com.teamgeso.hotelback.controller;
 
 import com.teamgeso.hotelback.dao.DaoReservation;
 import com.teamgeso.hotelback.model.Reservation;
+import com.teamgeso.hotelback.model.Service;
 import com.teamgeso.hotelback.model.Bill;
 import com.teamgeso.hotelback.model.Room;
 import com.teamgeso.hotelback.dto.ReservationDTO;
 import com.teamgeso.hotelback.repository.ReservationRepository;
+import com.teamgeso.hotelback.repository.ServiceRepository;
 import com.teamgeso.hotelback.repository.BillRepository;
 import com.teamgeso.hotelback.repository.RoomRepository;
 
@@ -18,6 +20,9 @@ import java.time.LocalDateTime;
 
 import java.util.Optional;
 import java.util.List;
+import java.util.Set;
+import java.util.ArrayList;
+import java.util.HashMap;
 
 @RestController
 @RequestMapping(path = "/reservations")
@@ -31,6 +36,8 @@ public class ReservationController implements DaoReservation {
     private RoomRepository roomRepository;
     @Autowired
     private BillRepository billRepository;
+    @Autowired
+    private ServiceRepository serviceRepository;
 
    private boolean isValid(String email) {
       return email.matches("^[\\w-_\\.+]*[\\w-_\\.]\\@([\\w]+\\.)+[\\w]+[\\w]$");
@@ -177,6 +184,56 @@ public class ReservationController implements DaoReservation {
             return new ResponseEntity<>("No se han encontrado reservas con ese código", HttpStatus.BAD_REQUEST);
 
         return new ResponseEntity<>(reservations, HttpStatus.OK);
+    }
+
+    @PostMapping(value = "/{id}/addService/{serviceId}")
+    public @ResponseBody
+    ResponseEntity findByCode(@PathVariable Integer id, @PathVariable Integer serviceId){
+        Reservation reservation = reservationRepository.findReservationById(id);
+        Service service = serviceRepository.findServiceById(serviceId);
+
+        if (service != null && reservation != null){
+            Bill bill = billRepository.findBillById(reservation.getBillId());
+            bill.getServices().add(service);
+            service.getBills().add(bill);
+            billRepository.save(bill);
+            return new ResponseEntity<>("Se ha añadido el servicio correctamente.", HttpStatus.OK);
+        }
+
+        return new ResponseEntity<>("El servicio o el registro no se han encontrado.", HttpStatus.BAD_REQUEST);
+    }
+
+    @PostMapping(value = "{code}/getTotal")
+    public @ResponseBody
+    ResponseEntity getTotal(@PathVariable String code){
+        List<Reservation> reservations = reservationRepository.findByCode(code);
+
+        if (reservations.isEmpty())
+            return new ResponseEntity<>("No se han encontrado reservas con ese código", HttpStatus.BAD_REQUEST);
+
+        List<HashMap<String, Object>> result = new ArrayList<>();
+        HashMap<String, Object> map = new HashMap<>();
+
+        for (Reservation reservation : reservations){
+            Double total = 0.0;
+            Room room = roomRepository.findRoomById(reservation.getRoomId());
+            Set<Service> services = billRepository.findBillById(reservation.getBillId()).getServices();
+
+            map.put("room", reservation.getRoomId());
+            map.put("roomValue", room.getPrice());
+            total += room.getPrice();
+
+            for (Service service : services){
+                map.put(service.getName(), service.getPrice()); 
+                total += service.getPrice();
+            }
+
+            map.put("total", total);
+            result.add(map);
+            map = new HashMap<>();
+        }
+
+        return new ResponseEntity<>(result, HttpStatus.OK);
     }
 
 }
