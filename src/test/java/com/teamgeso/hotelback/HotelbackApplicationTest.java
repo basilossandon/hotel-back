@@ -14,7 +14,9 @@ import com.teamgeso.hotelback.dto.RoomDTO;
 import com.teamgeso.hotelback.dto.ServiceDTO;
 
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
+import java.util.ArrayList;
 import java.time.LocalDateTime;
 
 public class HotelbackApplicationTest {
@@ -46,11 +48,13 @@ public class HotelbackApplicationTest {
          Integer id = 2;
          LocalDateTime now = LocalDateTime.now();
          LocalDateTime tomorrow = now.plusDays(1);
-         
+         Integer roomId=1;
+         Integer billId=1;
          String documentNumber = "1453241";
          String checkInName = "Gabriel";
          String code = "AX3400";
          String email="gabriel@usahc.cl";
+         List<Member> members = new ArrayList<>();
          Reservation reservation = new Reservation();
 
          reservation.setId(id);
@@ -61,12 +65,17 @@ public class HotelbackApplicationTest {
          reservation.setCheckInName(checkInName);
          reservation.setCode(code);
          reservation.setEmail(email);
+         reservation.setBillId(billId);
+         reservation.setRoomId(roomId);
+         reservation.setMembers(members);
          //setEmail
 
          assertEquals(reservation.getId(), id);
          assertEquals(reservation.getStart(), now);
          assertEquals(reservation.getEnd(), tomorrow);
-         
+         assertEquals(billId, reservation.getBillId());
+         assertEquals(roomId, reservation.getRoomId());
+         assertEquals(members, reservation.getMembers());
          assertEquals(documentNumber, reservation.getDocumentNumber());
          assertEquals(checkInName, reservation.getCheckInName());
          assertEquals(code, reservation.getCode());
@@ -180,6 +189,7 @@ public class HotelbackApplicationTest {
         String documentNumber="19185415";
         Integer age=23;
         String country="Japon";
+        
         Reservation reservation= new Reservation();
         Member member = new Member();
         member.setId(id);
@@ -202,6 +212,8 @@ public class HotelbackApplicationTest {
         String checkInName = "Gabriel";
         String code = "AX3400";
         String email = "gabriel@usach.cl";
+        Double finalPrice=20000.0;
+        Integer roomId=1;
         LocalDateTime now = LocalDateTime.now();
         LocalDateTime tomorrow = now.plusDays(1);
          
@@ -209,19 +221,20 @@ public class HotelbackApplicationTest {
 
          reservation.setStart(now);
          reservation.setEnd(tomorrow);
-         
+         reservation.setFinalPrice(finalPrice);
          reservation.setDocumentNumber(documentNumber);
          reservation.setCheckInName(checkInName);
          reservation.setCode(code);
          reservation.setEmail(email);
-
+         reservation.setRoomId(roomId);
          assertEquals(reservation.getStart(), now);
          assertEquals(reservation.getEnd(), tomorrow);
-         
+         assertEquals(finalPrice, reservation.getFinalPrice());
          assertEquals(documentNumber, reservation.getDocumentNumber());
          assertEquals(checkInName, reservation.getCheckInName());
          assertEquals(code, reservation.getCode());
          assertEquals(reservation.getEmail(),email);
+         assertEquals(roomId, reservation.getRoomId());
      }
 
      @Test
