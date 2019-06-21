@@ -6,7 +6,6 @@ import com.teamgeso.hotelback.model.Member;
 import org.springframework.http.ResponseEntity;
 
 import java.util.List;
-import java.util.Optional;
 
 public interface DaoMember {
     List<Member> getAllMembers();

@@ -16,8 +16,6 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.http.ResponseEntity;
 import org.springframework.http.HttpStatus;
 
-import java.time.LocalDateTime;
-
 import java.util.Optional;
 import java.util.List;
 import java.util.Set;
@@ -86,7 +84,7 @@ public class ReservationController implements DaoReservation {
             }
 
             for (Reservation roomReservation : allReservation){
-                if (roomReservation.getRoomId() == requestedRoom.getId()){
+                if (roomReservation.getRoomId().equals(requestedRoom.getId())){
                     if (reservation.getEnd().isAfter(roomReservation.getStart()) && reservation.getEnd().isBefore(roomReservation.getEnd()))
                         return new ResponseEntity<>("El fin de la reserva se encuentra entre una reserva ya solicitada.", HttpStatus.BAD_REQUEST);
 
@@ -139,7 +137,7 @@ public class ReservationController implements DaoReservation {
                     return new ResponseEntity<>("El correo ingresado no es válido.", HttpStatus.BAD_REQUEST);
 
                 for (Reservation roomReservation : allReservation){
-                    if (roomReservation.getRoomId() == requestedRoom.getId()){
+                    if (roomReservation.getRoomId().equals(requestedRoom.getId())){
                         if (reservation.getEnd().isAfter(roomReservation.getStart()) && reservation.getEnd().isBefore(roomReservation.getEnd()))
                             return new ResponseEntity<>("El fin de la reserva se encuentra entre una reserva ya solicitada.", HttpStatus.BAD_REQUEST);
 

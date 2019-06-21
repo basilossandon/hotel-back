@@ -9,8 +9,6 @@ import com.teamgeso.hotelback.repository.MemberRepository;
 import com.teamgeso.hotelback.repository.ReservationRepository;
 import com.teamgeso.hotelback.repository.BillRepository;
 
-//HASTA AQUÍ ESTÁ LISTO
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
@@ -18,7 +16,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.http.HttpStatus;
 
 import java.util.List;
-import java.util.Optional;
 
 @RestController
 @Validated

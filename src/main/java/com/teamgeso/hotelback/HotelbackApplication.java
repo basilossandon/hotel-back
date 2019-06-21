@@ -12,7 +12,6 @@ public class HotelbackApplication {
 
 	public static void main(String[] args) {
 		SpringApplication.run(HotelbackApplication.class, args);
-		System.out.println("Hora local" + LocalDateTime.now());
 	}
 
 }
