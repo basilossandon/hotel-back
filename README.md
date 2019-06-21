@@ -10,3 +10,4 @@
 ## Modelo Entidad-Relación
 
 ![MER](/src/images/entityRelationshipModel.png)
+
