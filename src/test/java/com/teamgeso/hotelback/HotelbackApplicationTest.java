@@ -115,7 +115,45 @@ public class HotelbackApplicationTest {
         assertEquals(roomId, bill.getRoomId());
         assertEquals(services, bill.getServices());
      }
-   
+     @Test 
+     public void billModelTest2(){
+         Integer id =2;
+         Integer roomId= 2;
+         Set<Service> services = new HashSet<>();
+        Bill bill= new Bill();
+        bill.setId(id);
+        bill.setRoomId(roomId);
+        bill.setServices(services);
+        assertEquals(id, bill.getId());
+        assertEquals(roomId, bill.getRoomId());
+        assertEquals(services, bill.getServices());
+     }
+     @Test 
+     public void serviceModelTest(){
+        Integer id =1;
+        Double price= 50.0;      
+        String name = "Vinacho";
+        Service service=new Service(id,price,name);
+        assertEquals(id, service.getId());
+        assertEquals(price, service.getPrice(),0.001);
+        assertEquals(name, service.getName());
+     }
+     @Test
+     public void serviceModelTest2(){
+        Integer id =1;
+        Double price= 50.0;      
+        String name = "Piscola";
+        Set<Bill> bills =new HashSet<>();
+        Service service=new Service();
+        service.setId(id);
+        service.setPrice(price);
+        service.setName(name);
+        service.setBills(bills);
+        assertEquals(id, service.getId());
+        assertEquals(price, service.getPrice(),0.001);
+        assertEquals(name, service.getName());
+        assertEquals(bills, service.getBills());
+     }
 
     // @Test
     // public void reservationDTOModelTest(){
