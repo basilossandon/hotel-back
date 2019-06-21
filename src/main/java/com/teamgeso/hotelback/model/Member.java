@@ -4,9 +4,6 @@ import javax.persistence.*;
 
 import java.io.Serializable;
 
-import java.util.HashSet;
-import java.util.Set;
-
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity

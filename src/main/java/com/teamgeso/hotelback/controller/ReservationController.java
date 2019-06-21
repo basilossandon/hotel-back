@@ -88,10 +88,6 @@ public class ReservationController implements DaoReservation {
                     if (reservation.getEnd().isAfter(roomReservation.getStart()) && reservation.getEnd().isBefore(roomReservation.getEnd()))
                         return new ResponseEntity<>("El fin de la reserva se encuentra entre una reserva ya solicitada.", HttpStatus.BAD_REQUEST);
 
-                    // I think that this else if is not necessary, but im not totally sure yet, so I will comment it.
-                    // else if (reservation.getStart().isAfter(roomReservation.getStart()) && reservation.getEnd().isBefore(roomReservation.getEnd()))
-                        // return new ResponseEntity<>("La reserva se encuentra entre una reserva ya solicitada.", HttpStatus.BAD_REQUEST);
-
                     else if (reservation.getStart().isAfter(roomReservation.getStart()) && reservation.getStart().isBefore(roomReservation.getEnd()))
                         return new ResponseEntity<>("El inicio de la reserva se encuentra entre una reserva ya solicitada.", HttpStatus.BAD_REQUEST);
                 }
@@ -141,10 +137,6 @@ public class ReservationController implements DaoReservation {
                         if (reservation.getEnd().isAfter(roomReservation.getStart()) && reservation.getEnd().isBefore(roomReservation.getEnd()))
                             return new ResponseEntity<>("El fin de la reserva se encuentra entre una reserva ya solicitada.", HttpStatus.BAD_REQUEST);
 
-                        // I think that this else if is not necessary, but im not totally sure yet, so I will comment it.
-                        // else if (reservation.getStart().isAfter(roomReservation.getStart()) && reservation.getEnd().isBefore(roomReservation.getEnd()))
-                            // return new ResponseEntity<>("La reserva se encuentra entre una reserva ya solicitada.", HttpStatus.BAD_REQUEST);
-
                         else if (reservation.getStart().isAfter(roomReservation.getStart()) && reservation.getStart().isBefore(roomReservation.getEnd()))
                             return new ResponseEntity<>("El inicio de la reserva se encuentra entre una reserva ya solicitada.", HttpStatus.BAD_REQUEST);
                     }
@@ -186,7 +178,7 @@ public class ReservationController implements DaoReservation {
 
     @PostMapping(value = "/{id}/addService/{serviceId}")
     public @ResponseBody
-    ResponseEntity findByCode(@PathVariable Integer id, @PathVariable Integer serviceId){
+    ResponseEntity addServiceToReservation(@PathVariable Integer id, @PathVariable Integer serviceId){
         Reservation reservation = reservationRepository.findReservationById(id);
         Service service = serviceRepository.findServiceById(serviceId);
 
