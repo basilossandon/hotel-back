@@ -3,9 +3,7 @@ package com.teamgeso.hotelback.controller;
 import com.teamgeso.hotelback.dao.DaoRoom;
 import com.teamgeso.hotelback.dto.RoomDTO;
 import com.teamgeso.hotelback.model.Room;
-import com.teamgeso.hotelback.model.Service;
 import com.teamgeso.hotelback.repository.RoomRepository;
-import com.teamgeso.hotelback.repository.ServiceRepository;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.annotation.Validated;
@@ -22,8 +20,6 @@ import java.util.List;
 public class RoomController implements DaoRoom {
     @Autowired
     private RoomRepository roomRepository;
-    @Autowired
-    private ServiceRepository serviceRepository;
 
     @GetMapping("")
     @ResponseBody

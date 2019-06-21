@@ -91,12 +91,4 @@ public class Member implements Serializable {
     public void setReservation(Reservation reservation){
         this.reservation = reservation;
     }
-
-    // public Integer getBillId(){
-    //     return this.billId;
-    // }
-
-    // public void setBillId(Integer billId){
-    //     this.billId = billId;
-    // }
 }
