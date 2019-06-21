@@ -7,8 +7,11 @@ import com.teamgeso.hotelback.model.Reservation;
 import com.teamgeso.hotelback.model.Room;
 import com.teamgeso.hotelback.model.Service;
 import com.teamgeso.hotelback.model.Bill;
+import com.teamgeso.hotelback.model.Member;
+import com.teamgeso.hotelback.dto.MemberDTO;
 import com.teamgeso.hotelback.dto.ReservationDTO;
 import com.teamgeso.hotelback.dto.RoomDTO;
+import com.teamgeso.hotelback.dto.ServiceDTO;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -18,9 +21,7 @@ public class HotelbackApplicationTest {
 
      @Test
      public void reservationModelTest(){
-     	Integer id = 1;
-     	
-     	
+     	Integer id = 1;    	
      	String documentNumber = "1453241";
      	String checkInName = "Gabriel";
      	String code = "AX3400";
@@ -154,61 +155,129 @@ public class HotelbackApplicationTest {
         assertEquals(name, service.getName());
         assertEquals(bills, service.getBills());
      }
+     @Test
 
-    // @Test
-    // public void reservationDTOModelTest(){
-    //     LocalDateTime now = LocalDateTime.now();
-    //     LocalDateTime tomorrow = now.plusDays(1);
-    //     Double price = 10000.0;
-    //     String documentNumber = "1453241";
-    //     String checkInName = "Gabriel";
-    //     String code = "AX3400";
-    //     Integer room_id = 2;
-    //     ReservationDTO reservation = new ReservationDTO();
+     public void memberModelTest(){
+        Integer id =1;
+        String name="Claudio";
+        String documentNumber="19185415";
+        Integer age=23;
+        String country="Japon";
+        Reservation reservation= new Reservation();
+        Member member = new Member(id,name,documentNumber,age,country,reservation);
+        assertEquals(id, member.getId());
+        assertEquals(name, member.getName());
+        assertEquals(documentNumber, member.getDocumentNumber());
+        assertEquals(age, member.getAge());
+        assertEquals(country, member.getCountry());
+        assertEquals(reservation,member.getReservation());
+     }
+     @Test
 
-    //     reservation.setStart(now);
-    //     reservation.setEnd(tomorrow);
-    //     reservation.setFinalPrice(price);
-    //     reservation.setDocumentNumber(documentNumber);
-    //     reservation.setCheckInName(checkInName);
-    //     reservation.setCode(code);
-    //     reservation.setRoomId(room_id);
+     public void memberModelTest2(){
+        Integer id =1;
+        String name="Claudio";
+        String documentNumber="19185415";
+        Integer age=23;
+        String country="Japon";
+        Reservation reservation= new Reservation();
+        Member member = new Member();
+        member.setId(id);
+        member.setAge(age);
+        member.setCountry(country);
+        member.setName(name);
+        member.setDocumentNumber(documentNumber);
+        member.setReservation(reservation);
+        assertEquals(id, member.getId());
+        assertEquals(name, member.getName());
+        assertEquals(documentNumber, member.getDocumentNumber());
+        assertEquals(age, member.getAge());
+        assertEquals(country, member.getCountry());
+        assertEquals(reservation,member.getReservation());
+     }
+     @Test
+     public void reservationDTOModelTest(){
+           	
+        String documentNumber = "1453241";
+        String checkInName = "Gabriel";
+        String code = "AX3400";
+        String email = "gabriel@usach.cl";
+        LocalDateTime now = LocalDateTime.now();
+        LocalDateTime tomorrow = now.plusDays(1);
+         
+         ReservationDTO reservation = new ReservationDTO();
 
-    //     assertEquals(reservation.getStart(), now);
-    //     assertEquals(reservation.getEnd(), tomorrow);
-    //     assertEquals(reservation.getFinalPrice(), price, 0.001);
-    //     assertEquals(documentNumber, reservation.getDocumentNumber());
-    //     assertEquals(checkInName, reservation.getCheckInName());
-    //     assertEquals(code, reservation.getCode());
-    //     assertEquals(reservation.getRoomId(), room_id);
-    // }
+         reservation.setStart(now);
+         reservation.setEnd(tomorrow);
+         
+         reservation.setDocumentNumber(documentNumber);
+         reservation.setCheckInName(checkInName);
+         reservation.setCode(code);
+         reservation.setEmail(email);
 
-    // @Test
-    // public void roomDTOModelTest(){
-    //     Integer capacity = 2;
-    //     Double price = 10000.0;
-    //     Integer roomTypeId = 2;
+         assertEquals(reservation.getStart(), now);
+         assertEquals(reservation.getEnd(), tomorrow);
+         
+         assertEquals(documentNumber, reservation.getDocumentNumber());
+         assertEquals(checkInName, reservation.getCheckInName());
+         assertEquals(code, reservation.getCode());
+         assertEquals(reservation.getEmail(),email);
+     }
 
-    //     RoomDTO room = new RoomDTO();
-    //     room.setCapacity(capacity);
-    //     room.setPrice(price);
-    //     room.setRoomTypeId(roomTypeId);
+     @Test
+     public void roomDTOModelTest(){
+         Integer capacity = 2;
+         Double price = 10000.0;
+         String roomTypeId = "Matrimonial";
 
-    //     assertEquals(room.getCapacity(), capacity);
-    //     assertEquals(room.getPrice(), price, 0.001);
-    //     assertEquals(room.getRoomTypeId(), roomTypeId);
-    // }
+         RoomDTO room = new RoomDTO();
+         room.setCapacity(capacity);
+         room.setPrice(price);
+         room.setType(roomTypeId);
 
-    // @Test
-    // public void roomTypeDTOModelTest(){
-    //     Double price = 100000.0;
-    //     String name = "Matrimonial";
+         assertEquals(room.getCapacity(), capacity);
+         assertEquals(room.getPrice(), price, 0.001);
+         assertEquals(room.getType(), roomTypeId);
+     }
+     @Test
+     public void serviceDTOModelTest(){
+        Double price= 50.0;      
+        String name = "Vinacho";
 
-    //     RoomTypeDTO room = new RoomTypeDTO();
-    //     room.setPrice(price);
-    //     room.setName(name);
+        ServiceDTO service = new ServiceDTO();
+        
+        service.setPrice(price);
+        service.setName(name);
 
-    //     assertEquals(room.getPrice(), price, 0.001);
-    //     assertEquals(room.getName(), name);
-    // }
+        assertEquals(service.getName(), name);
+        assertEquals(service.getPrice(), price, 0.001);
+        
+     }
+     @Test
+     public void memberDTOModelTest(){
+        String name="Claudio";
+        String documentNumber="19185415";
+        Integer age=23;
+        String country="Japon";
+        Reservation reservation= new Reservation();
+
+        MemberDTO member = new MemberDTO();
+        
+        member.setAge(age);
+        member.setCountry(country);
+        member.setDocumentNumber(documentNumber);
+        member.setReservationId(reservation.getId());
+        member.setName(name);
+
+        
+        assertEquals(name, member.getName());
+        assertEquals(documentNumber, member.getDocumentNumber());
+        assertEquals(age, member.getAge());
+        assertEquals(country, member.getCountry());
+        assertEquals(reservation.getId(),member.getReservationId());
+        
+     }
+
+
+
 }
