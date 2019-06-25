@@ -184,13 +184,15 @@ public class HotelbackApplicationTest {
         String documentNumber = "19185415";
         Integer age = 23;
         String country = "Japon";
+        String code = "Japon";
         Reservation reservation = new Reservation();
-        Member member = new Member(id, name, documentNumber, age, country, reservation);
+        Member member = new Member(id, name, documentNumber, age, country, code, reservation);
         assertEquals(id, member.getId());
         assertEquals(name, member.getName());
         assertEquals(documentNumber, member.getDocumentNumber());
         assertEquals(age, member.getAge());
         assertEquals(country, member.getCountry());
+        assertEquals(code, member.getCode());
         assertEquals(reservation, member.getReservation());
     }
 

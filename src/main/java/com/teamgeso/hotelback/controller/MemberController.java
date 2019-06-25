@@ -51,7 +51,6 @@ public class MemberController implements DaoMember {
         createdMember.setAge(member.getAge());
         createdMember.setCode(member.getCode());
         createdMember.setCountry(member.getCountry());
-        
 
         if (createdMember.getName() != null &&
             createdMember.getDocumentNumber() != null &&
