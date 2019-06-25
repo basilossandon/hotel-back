@@ -5,6 +5,7 @@ public class MemberDTO {
     private String documentNumber;
     private Integer age;
     private String country;
+    private String code;
     private Integer reservationId;
 
     public String getName() {
@@ -37,6 +38,14 @@ public class MemberDTO {
 
     public void setCountry(String country) {
         this.country = country;
+    }
+
+    public String getCode() {
+        return this.code;
+    }
+
+    public void setCode(String code) {
+        this.code = code;
     }
 
     public Integer getReservationId() {

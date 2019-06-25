@@ -21,6 +21,8 @@ public class Member implements Serializable {
     private Integer age;
     @Column(name = "country", nullable = false)
     private String country;
+    @Column(name = "code", nullable = false)
+    private String code;
 
     @JsonIgnore
     @ManyToOne(fetch = FetchType.LAZY)
@@ -31,13 +33,15 @@ public class Member implements Serializable {
                   String name, 
                   String documentNumber, 
                   Integer age, 
-                  String country, 
+                  String country,
+                  String code, 
                   Reservation reservation){
         this.id = id;
         this.name = name;
         this.documentNumber = documentNumber;
         this.age = age;
         this.country = country;
+        this.code = code;
         this.reservation = reservation;
     }
 
@@ -82,6 +86,14 @@ public class Member implements Serializable {
 
     public void setCountry(String country){
         this.country = country;
+    }
+
+    public String getCode(){
+        return this.code;
+    }
+
+    public void setCode(String code){
+        this.code = code;
     }
 
     public Reservation getReservation(){
