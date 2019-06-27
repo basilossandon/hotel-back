@@ -39,8 +39,9 @@ public class ServiceController implements DaoService {
         Service createdService = new Service();
         createdService.setPrice(service.getPrice());
         createdService.setName(service.getName());
+        createdService.setCategory(service.getCategory());
 
-        if (createdService.getPrice() != null && createdService.getName() != null){
+        if (createdService.getPrice() != null && createdService.getName() != null && createdService.getCategory() != null){
             if (createdService.getPrice() <= 0)
                 return new ResponseEntity<>("El valor del servicio es menor o igual a 0.", HttpStatus.BAD_REQUEST);
 
@@ -59,8 +60,9 @@ public class ServiceController implements DaoService {
 
         serviceToUpdate.setPrice(service.getPrice());
         serviceToUpdate.setName(service.getName());
+        serviceToUpdate.setCategory(service.getCategory());
 
-        if (serviceToUpdate.getPrice() != null && serviceToUpdate.getName() != null){
+        if (serviceToUpdate.getPrice() != null && serviceToUpdate.getName() != null && serviceToUpdate.getCategory() != null){
             if (serviceToUpdate.getPrice() <= 0)
                 return new ResponseEntity<>("El valor del servicio es menor o igual a 0.", HttpStatus.BAD_REQUEST);
 

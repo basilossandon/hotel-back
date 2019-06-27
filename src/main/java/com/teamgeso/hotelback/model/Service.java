@@ -18,6 +18,8 @@ public class Service implements Serializable {
     private Double price;
     @Column(name = "name", nullable = false)
     private String name;
+    @Column(name = "category", nullable = false)
+    private String category;
 
     @ManyToMany(cascade = {CascadeType.ALL})
     @JsonIgnore
@@ -58,6 +60,14 @@ public class Service implements Serializable {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public String getCategory() {
+        return this.category;
+    }
+
+    public void setCategory(String category) {
+        this.category = category;
     }
 
     public Set<Bill> getBills(){
