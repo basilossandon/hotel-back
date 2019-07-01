@@ -241,29 +241,36 @@ public class ReservationController implements DaoReservation {
             Double total = 0.0;
             // Set<Service> services = billRepository.findBillById(reservation.getBillId()).getServices();
             String serviceString = billRepository.findBillById(reservation.getBillId()).getServiceString();
-            String[] servicesSplitted = serviceString.split(";");
 
-            List<Service> servicesList = new ArrayList<>();
+            if (serviceString != null){
+                String[] servicesSplitted = serviceString.split(";");
+                List<Service> servicesList = new ArrayList<>();
 
-            for (String s : servicesSplitted)
-                servicesList.add(serviceRepository.findServiceById(Integer.parseInt(s)));
+                for (String s : servicesSplitted)
+                    servicesList.add(serviceRepository.findServiceById(Integer.parseInt(s)));
 
-            for (Service s : servicesList){
-                Integer amount = (Integer)mapToCount.get(s.getName());
-                mapToCount.put(s.getName(), (amount == null) ? 1 : amount + 1);
+                for (Service s : servicesList){
+                    Integer amount = (Integer)mapToCount.get(s.getName());
+                    mapToCount.put(s.getName(), (amount == null) ? 1 : amount + 1);
+                }
+
+                for (Service service : servicesList){
+                    Integer amount = (Integer)mapToCount.get(service.getName());
+                    map.put((amount == null) ? service.getName() : service.getName() + "(x" + amount + ")", (amount == null) ? service.getPrice() : service.getPrice() * amount); 
+                    Double plus = (amount == null) ? service.getPrice() : service.getPrice() * amount;
+                    total += plus;
+                }
+
+                map.put("serviceString", serviceString);
+            } else {
+                map.put("serviceString", "");
             }
 
-            map.put("serviceString", serviceString);
             map.put("room", reservation.getRoomId());
             map.put("roomValue", room.getPrice());
             total += room.getPrice();
 
-            for (Service service : servicesList){
-                Integer amount = (Integer)mapToCount.get(service.getName());
-                map.put((amount == null) ? service.getName() : service.getName() + "(x" + amount + ")", (amount == null) ? service.getPrice() : service.getPrice() * amount); 
-                Double plus = (amount == null) ? service.getPrice() : service.getPrice() * amount;
-                total += plus;
-            }
+
 
             map.put("total", total);
             result.add(map);
@@ -271,5 +278,4 @@ public class ReservationController implements DaoReservation {
 
         return new ResponseEntity<>(result, HttpStatus.OK);
     }
-
 }
