@@ -6,6 +6,7 @@ import com.teamgeso.hotelback.model.Service;
 import com.teamgeso.hotelback.model.Bill;
 import com.teamgeso.hotelback.model.Room;
 import com.teamgeso.hotelback.dto.ReservationDTO;
+import com.teamgeso.hotelback.dto.ServiceListDTO;
 import com.teamgeso.hotelback.repository.ReservationRepository;
 import com.teamgeso.hotelback.repository.ServiceRepository;
 import com.teamgeso.hotelback.repository.BillRepository;
@@ -176,21 +177,51 @@ public class ReservationController implements DaoReservation {
         return new ResponseEntity<>(reservations, HttpStatus.OK);
     }
 
-    @PostMapping(value = "/{id}/addService/{serviceId}")
-    public @ResponseBody
-    ResponseEntity addServiceToReservation(@PathVariable Integer id, @PathVariable Integer serviceId){
-        Reservation reservation = reservationRepository.findReservationById(id);
-        Service service = serviceRepository.findServiceById(serviceId);
+    // @PostMapping(value = "/{id}/addService/{serviceId}")
+    // public @ResponseBody
+    // ResponseEntity addServiceToReservation(@PathVariable Integer id, @PathVariable Integer serviceId){
+    //     Reservation reservation = reservationRepository.findReservationById(id);
+    //     Service service = serviceRepository.findServiceById(serviceId);
 
-        if (service != null && reservation != null){
+        // if (service != null && reservation != null){
+        //     Bill bill = billRepository.findBillById(reservation.getBillId());
+        //     bill.getServices().add(service);
+        //     service.getBills().add(bill);
+        //     bill.
+        //     billRepository.save(bill);
+        //     return new ResponseEntity<>("Se ha añadido el servicio correctamente.", HttpStatus.OK);
+        // }
+
+    //     return new ResponseEntity<>("El servicio o el registro no se han encontrado.", HttpStatus.BAD_REQUEST);
+    // }
+
+    @PostMapping(value = "/{id}/addService")
+    public @ResponseBody
+    ResponseEntity addServiceToReservation(@PathVariable Integer id, @RequestBody ServiceListDTO serviceList){
+        Reservation reservation = reservationRepository.findReservationById(id);
+        String serviceString = serviceList.getServiceString();
+        String[] servicesSplitted = serviceString.split(";");
+
+        for (String s : servicesSplitted)
+            if (serviceRepository.findServiceById(Integer.parseInt(s)) == null)
+                return new ResponseEntity<>("El servicio " + s + " no se ha encontrado", HttpStatus.BAD_REQUEST);
+        
+        if (reservation != null){
             Bill bill = billRepository.findBillById(reservation.getBillId());
-            bill.getServices().add(service);
-            service.getBills().add(bill);
+            // bill.getServices().add(service);
+            // service.getBills().add(bill);
+            bill.setServiceString(serviceString);
             billRepository.save(bill);
             return new ResponseEntity<>("Se ha añadido el servicio correctamente.", HttpStatus.OK);
         }
 
-        return new ResponseEntity<>("El servicio o el registro no se han encontrado.", HttpStatus.BAD_REQUEST);
+        return new ResponseEntity<>("La reserva " + id + " no se ha encontrado", HttpStatus.OK);
+    }
+
+    @GetMapping(value = "/{id}/getBill")
+    public @ResponseBody
+    ResponseEntity getBillFromReservation(@PathVariable Integer id){
+        return (reservationRepository.findReservationById(id) != null) ? ((reservationRepository.findReservationById(id).getBillId() != null) ? new ResponseEntity<>(billRepository.findBillById(reservationRepository.findReservationById(id).getBillId()), HttpStatus.OK) : new ResponseEntity<>("No hay registro asociado a la reserva.", HttpStatus.OK)) : new ResponseEntity<>("La reserva no se a encontrado", HttpStatus.BAD_REQUEST);
     }
 
     @PostMapping(value = "{code}/getTotal")
@@ -202,25 +233,40 @@ public class ReservationController implements DaoReservation {
             return new ResponseEntity<>("No se han encontrado reservas con ese código", HttpStatus.BAD_REQUEST);
 
         List<HashMap<String, Object>> result = new ArrayList<>();
-        HashMap<String, Object> map = new HashMap<>();
-
+        
         for (Reservation reservation : reservations){
-            Double total = 0.0;
             Room room = roomRepository.findRoomById(reservation.getRoomId());
-            Set<Service> services = billRepository.findBillById(reservation.getBillId()).getServices();
+            HashMap<String, Object> map = new HashMap<>();
+            HashMap<String, Object> mapToCount = new HashMap<>();
+            Double total = 0.0;
+            // Set<Service> services = billRepository.findBillById(reservation.getBillId()).getServices();
+            String serviceString = billRepository.findBillById(reservation.getBillId()).getServiceString();
+            String[] servicesSplitted = serviceString.split(";");
 
+            List<Service> servicesList = new ArrayList<>();
+
+            for (String s : servicesSplitted)
+                servicesList.add(serviceRepository.findServiceById(Integer.parseInt(s)));
+
+            for (Service s : servicesList){
+                Integer amount = (Integer)mapToCount.get(s.getName());
+                mapToCount.put(s.getName(), (amount == null) ? 1 : amount + 1);
+            }
+
+            map.put("serviceString", serviceString);
             map.put("room", reservation.getRoomId());
             map.put("roomValue", room.getPrice());
             total += room.getPrice();
 
-            for (Service service : services){
-                map.put(service.getName(), service.getPrice()); 
-                total += service.getPrice();
+            for (Service service : servicesList){
+                Integer amount = (Integer)mapToCount.get(service.getName());
+                map.put((amount == null) ? service.getName() : service.getName() + "(x" + amount + ")", (amount == null) ? service.getPrice() : service.getPrice() * amount); 
+                Double plus = (amount == null) ? service.getPrice() : service.getPrice() * amount;
+                total += plus;
             }
 
             map.put("total", total);
             result.add(map);
-            map = new HashMap<>();
         }
 
         return new ResponseEntity<>(result, HttpStatus.OK);

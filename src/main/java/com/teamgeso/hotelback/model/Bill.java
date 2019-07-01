@@ -19,16 +19,21 @@ public class Bill implements Serializable {
     @Column(name = "room_id", nullable = false)
     private Integer roomId;
 
+    @Column(name = "service_string", nullable = true)
+    private String serviceString;
+
     @ManyToMany(mappedBy = "bills")
     @JsonIgnore
     private Set<Service> services = new HashSet<>();
 
     public Bill(Integer id,
                 Integer roomId,
+                String serviceString,
                 Set<Service> services){
         this.id = id;
-        this.services = services;
         this.roomId = roomId;
+        this.serviceString = serviceString;
+        this.services = services;
     }
 
     public Bill(){
@@ -48,6 +53,14 @@ public class Bill implements Serializable {
     
     public void setRoomId(Integer roomId) {
         this.roomId = roomId;
+    }
+
+    public String getServiceString(){
+        return this.serviceString;
+    }
+
+    public void setServiceString(String serviceString){
+        this.serviceString = serviceString;
     }
 
     public Set<Service> getServices(){
