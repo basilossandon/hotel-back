@@ -1,7 +1,6 @@
 # Aplicación para TINGESO
 ## Vistas
 
-
 1. Vista de despliegue
 
 ![Deployment View](/src/images/deploymentView.png)
